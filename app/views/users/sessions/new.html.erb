@@ -1,26 +1,120 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<nav class="navbar navbar-dark bg-info fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Logo</a>
+    <ul class="nav">
+      <li class="nav-item ">
+        <%= link_to "Login", new_session_path(resource_name), class: "nav-link active text-white" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Sign Up", new_user_registration_path, class: "nav-link text-white" %>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Language </a>
+      </li>
+    </ul>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-info" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-success" type="submit">Search</button>
+        </form>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</nav>
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-info">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">Share</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">Invite</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">Lottery</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">Shop</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">Language </a>
+    </li>
+  </ul>
+  </div>
+</nav>
+<section class="vh-100" style="background-color: #ffff;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+          <ul class="nav nav-tabs justify-content-center pt-4" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active text-primary" id="pills-login-tab" data-toggle="pill" href="/users/sign_in" role="tab" aria-controls="pills-login"
+             aria-selected="true">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-primary" id="pills-register-tab" data-toggle="pill" href="/users/sign_up" role="tab" aria-controls="pills-register"
+             aria-selected="false">Register</a>
+        </li>
+      </ul>
 
-<%= render "users/shared/links" %>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="form-outline mb-4">
+                <%= f.label :email %><br/>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+              </div>
+
+              <div class="form-outline mb-4">
+                <%= f.label :password %><br/>
+                <%= f.password_field :password, autocomplete: "current-password" %>
+              </div>
+
+              <% if devise_mapping.rememberable? %>
+                <div class="form-outline mb-4">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+              <% end %>
+
+              <div class="pt-1 mb-4">
+                <%= f.submit "Log in", class: "btn btn-primary btn-lg btn-block" %>
+              </div>
+            <% end %>
+
+            <%= render "users/shared/links" %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
