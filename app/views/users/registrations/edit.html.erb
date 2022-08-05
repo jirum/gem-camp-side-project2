@@ -65,6 +65,16 @@
       <%= render "users/shared/error_messages", resource: resource %>
 
       <div class="field">
+      <%= f.label :image %>
+      <%= f.file_field :image, class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :username %><br/>
+        <%= f.text_field :username, autocomplete: "username", class: "form-control form-control-lg mb-3" %>
+      </div>
+
+      <div class="field">
         <%= f.label :email %><br/>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg mb-3" %>
       </div>
@@ -72,6 +82,11 @@
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
+
+      <div class="field">
+        <%= f.label :phone %><br/>
+        <%= f.phone_field :phone, autofocus: true, autocomplete: "phone", class: "form-control form-control-lg mb-3" %>
+      </div>
 
       <div class="field">
         <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br/>
