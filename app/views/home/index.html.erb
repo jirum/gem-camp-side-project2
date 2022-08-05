@@ -1,4 +1,194 @@
-<h1> Hello </h1>
+<style xmlns="http://www.w3.org/1999/html">
+    .marquee {
+        overflow: hidden;
+        background-color: #000;
+    }
+</style>
 
-<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-
+<nav class="navbar bg-info fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Logo</a>
+    <ul class="nav offset-md-9">
+      <% if current_user %>
+        <li class="nav-item ">
+          <a class="nav-link text-white" href="#">Coins </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Claim </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Language </a>
+        </li>
+        </ul>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <%= "#{"Username: "}#{current_user.username}" %>
+              </li>
+              <li class="nav-item">
+                <%= "#{"Email: "}#{current_user.email}" %>
+              </li>
+              <li class="nav-item">
+                <%= "#{"Coins: "}#{current_user.coins}" %>
+              </li>
+              <li class="nav-item">
+                <button class="btn btn-primary form-control">Cash In Now</button>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Profile</a>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+              </li>
+            </ul>
+          </div>
+        </div>
+        </div>
+        </nav>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner" style="height: 50vh">
+            <div class="carousel-item active">
+              <img src="./banner/guitar.jpg" class="d-block 100" alt="guitar">
+            </div>
+            <div class="carousel-item">
+              <img src="./banner/drums.jpg" class="d-block 100" alt="drums">
+            </div>
+            <div class="carousel-item">
+              <img src="./banner/car.jpg" class="d-block 100" alt="car">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <div class="marquee" data-controller="marquee">
+          <div class="wrap wrap-padding">
+            <ul id="marquee" class="marquee-list" data-marquee-target="marquee" style="padding-top: 7px; height: 25px">
+              <marquee class="text-light"><h5 style=""> GGWP </h5></marquee>
+            </ul>
+          </div>
+        </div>
+        <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-info">
+          <ul class="nav justify-content-center offset-md-5">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Share</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Invite</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Lottery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Shop</a>
+            </li>
+            <li class="nav-item">
+              <a><%= link_to "Me", users_profile_path, class: "nav-link text-white" %></a>
+            </li>
+          </ul>
+        </nav>
+      <% else %>
+        <ul class="nav">
+          <li class="nav-item ">
+            <%= link_to "Login", new_user_session_path, class: "nav-link active text-white" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign Up", new_user_registration_path, class: "nav-link text-white" %>
+          </li>
+        </ul>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <p><a class="nav-link" href="#">Contact Us</a></p>
+          <p><a class="nav-link" href="#">Facebook</a></p>
+        </div>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner" style="height: 50vh">
+            <div class="carousel-item active">
+              <img src="./banner/guitar.jpg" class="d-block 100" alt="guitar">
+            </div>
+            <div class="carousel-item">
+              <img src="./banner/drums.jpg" class="d-block 100" alt="drums">
+            </div>
+            <div class="carousel-item">
+              <img src="./banner/car.jpg" class="d-block 100" alt="car">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <div class="marquee" data-controller="marquee">
+          <div class="wrap wrap-padding">
+            <ul id="marquee" class="marquee-list" data-marquee-target="marquee" style="padding-top: 7px; height: 25px">
+              <marquee class="text-light"><h5 style=""> GGWP </h5></marquee>
+            </ul>
+          </div>
+        </div>
+        <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-info">
+          <ul class="nav justify-content-center offset-md-5">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Share</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Invite</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Lottery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Shop</a>
+            </li>
+          </ul>
+        </nav>
+      <% end %>
+      <section>
+        <div class="container">
+          <h4>Winners Feedback</h4>
+          <div class="row row-cols-4">
+            <img src="phone.png" class="col" width="250px" alt="iphone" data-wow-delay="0.3s">
+            <img src="phone.png" class="col" width="250px" alt="iphone" data-wow-delay="0.3s">
+            <img src="phone.png" class="col" width="250px" alt="iphone" data-wow-delay="0.3s">
+            <img src="phone.png" class="col" width="250px" alt="iphone" data-wow-delay="0.3s">
+          </div>
+          <h4>Coming Soon</h4>
+          <div class="row row-cols-4">
+            <img src="phone.png" class="col" width="250px" alt="iphone" data-wow-delay="0.3s">
+            <img src="phone.png" class="col" width="250px" alt="iphone" data-wow-delay="0.3s">
+          </div>
+        </div>
+      </section>
