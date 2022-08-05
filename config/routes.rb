@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   constraints(ClientDomainConstraint.new) do
     devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
+    namespace :users do
+      resource :profile, only: :show
+    end
     root :to => 'home#index'
   end
 
