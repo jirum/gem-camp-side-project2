@@ -1,43 +1,125 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<style>
+    .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-top: 70px; /* Added */
+    }
+</style>
+<nav class="navbar bg-info fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Logo</a>
+    <ul class="nav offset-md-9">
+      <li class="nav-item ">
+        <a class="nav-link text-white" href="#">Coins </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Claim </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Language </a>
+      </li>
+    </ul>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <%= "#{"Username: "}#{current_user.username}" %>
+          </li>
+          <li class="nav-item">
+            <%= "#{"Email: "}#{current_user.email}" %>
+          </li>
+          <li class="nav-item">
+            <%= "#{"Coins: "}#{current_user.coins}" %>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-success" type="submit">Cash In Now</button>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Profile</a>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
+</nav>
+<div class="card w-50">
+  <div class="card-body">
+    <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <div class="field">
+        <%= f.label :email %><br/>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg mb-3" %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br/>
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg mb-3" %>
+        <% if @minimum_password_length %>
+          <br/>
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br/>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg mb-3" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br/>
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control form-control-lg mb-3" %>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <%= f.submit "Update", class:'btn btn-primary form-control' %>
+        </div>
     <% end %>
+    <div class="col">
+      <%= link_to "Back", :back, class:'btn btn-primary form-control' %>
+    </div>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-info">
+  <ul class="nav justify-content-center offset-md-5">
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">Share</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">Invite</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">Lottery</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">Shop</a>
+    </li>
+    <li class="nav-item">
+      <a><%= link_to "Me", users_profile_path, class: "nav-link text-white" %></a>
+    </li>
+  </ul>
+</nav>
