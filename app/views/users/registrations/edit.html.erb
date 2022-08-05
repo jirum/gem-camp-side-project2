@@ -65,6 +65,7 @@
       <%= render "users/shared/error_messages", resource: resource %>
 
       <div class="field">
+      <%= image_tag current_user.image.thumb.url%>
       <%= f.label :image %>
       <%= f.file_field :image, class: 'form-control' %>
       </div>
