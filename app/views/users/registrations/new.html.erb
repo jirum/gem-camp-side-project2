@@ -104,6 +104,8 @@
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <div class="card shadow-2-strong" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= render "users/shared/error_messages", resource: resource %>
             <ul class="nav nav-tabs justify-content-center pt-4" id="pills-tab" role="tablist">
               <li class="nav-item">
                 <a class="nav-link text-primary" id="pills-login-tab" data-toggle="pill" href="/users/sign_in" role="tab" aria-controls="pills-login"
@@ -114,9 +116,6 @@
                    aria-selected="true">Register</a>
               </li>
             </ul>
-
-            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-              <%= render "users/shared/error_messages", resource: resource %>
 
               <div class="form-outline mb-4">
                 <%= f.label :email %><br/>

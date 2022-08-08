@@ -57,64 +57,52 @@
     </div>
   </div>
 </nav>
-<div class="card w-50">
+<div class="card w-50" style="margin-bottom: 100px">
   <div class="card-body">
     <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "users/shared/error_messages", resource: resource %>
 
-      <div class="field">
+      <div class="form-group">
       <%= image_tag current_user.image.thumb.url%>
-      <%= f.label :image %>
-      <%= f.file_field :image, class: 'form-control' %>
+      <%= f.file_field :image, class: 'form-control mt-3'%>
       </div>
 
-      <div class="field">
-        <%= f.label :username %><br/>
-        <%= f.text_field :username, autocomplete: "username", class: "form-control form-control-lg mb-3" %>
+      <div class="form-group">
+        <%= f.text_field :username, autocomplete: "username", class: 'form-control mt-3', placeholder: 'Username' %>
       </div>
 
-      <div class="field">
-        <%= f.label :email %><br/>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg mb-3" %>
+      <div class="form-group">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control mt-3', placeholder: 'Email' %>
       </div>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
 
-      <div class="field">
-        <%= f.label :phone %><br/>
-        <%= f.phone_field :phone, autofocus: true, autocomplete: "phone", class: "form-control form-control-lg mb-3" %>
+      <div class="form-group">
+        <%= f.phone_field :phone, autofocus: true, autocomplete: "phone", class: 'form-control mt-md-3', placeholder: 'Phone' %>
       </div>
 
-      <div class="field">
-        <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br/>
-        <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg mb-3" %>
-        <% if @minimum_password_length %>
-          <br/>
-          <em><%= @minimum_password_length %> characters minimum</em>
-        <% end %>
+      <div class="form-group">
+        <%= f.password_field :password, autocomplete: "new-password", class: 'form-control mt-3', placeholder: 'Current Password' %>
       </div>
 
-      <div class="field">
-        <%= f.label :password_confirmation %><br/>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg mb-3" %>
+      <div class="form-group">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control mt-3', placeholder: 'New Password' %>
       </div>
 
-      <div class="field">
-        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br/>
-        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control form-control-lg mb-3" %>
+      <div class="form-group">
+        <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control mt-3', placeholder: 'Current Password' %>
       </div>
-
       <div class="row">
         <div class="col">
-          <%= f.submit "Update", class:'btn btn-primary form-control' %>
+          <%= f.submit "Update", class:'btn btn-primary form-control mt-3' %>
         </div>
     <% end %>
     <div class="col">
-      <%= link_to "Back", :back, class:'btn btn-primary form-control' %>
+      <%= link_to "Back", :back, class:'btn btn-primary form-control mt-3' %>
     </div>
     </div>
   </div>
