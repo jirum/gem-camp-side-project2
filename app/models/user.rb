@@ -6,4 +6,12 @@ class User < ApplicationRecord
 
   validates :phone, phone: {allow_blank: true}
   mount_uploader :image, ImageUploader
+
+  def client?
+    role == 'client'
+  end
+
+  def admin?
+    role == 'admin'
+  end
 end
