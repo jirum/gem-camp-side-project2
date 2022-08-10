@@ -14,7 +14,7 @@
       <%= render "users/shared/error_messages", resource: resource %>
 
       <div class="form-group">
-      <%= image_tag current_user.image.thumb.url%>
+      <%= image_tag current_user.image.thumb.url if current_user.image?%>
       <%= f.file_field :image, class: 'form-control mt-3'%>
       </div>
 
