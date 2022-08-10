@@ -22,7 +22,7 @@
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <%= image_tag current_user.image.thumb.url, class:"rounded mx-auto d-block w-50 p-3"%>
+              <%= image_tag current_user.image.thumb.url, class:"rounded mx-auto d-block w-50 p-3" if current_user.image?%>
               <li class="nav-item">
                 <%= "#{"Username: "}#{current_user.username}" %>
               </li>
