@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   validates_uniqueness_of :username
   validates :phone, phone: {allow_blank: true}
+  has_many :addresses
+
   mount_uploader :image, ImageUploader
 
   def client?
