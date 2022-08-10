@@ -1,9 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
-  def edit
-    @user = current_user
-  end
+  def edit; end
 
   def update
     if params[:user][:current_password].present?
@@ -33,7 +31,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def password_params
-    params.require(:user).permit(:password,:password_confirmation, :current_password)
+    params.require(:user).permit(:password,:password_confirmation, :current_password, :email, :username, :phone, :image)
   end
 
   def configure_account_update_params
