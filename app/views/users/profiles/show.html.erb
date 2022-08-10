@@ -5,58 +5,6 @@
         margin-top: 70px;
     }
 </style>
-<nav class="navbar bg-info fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Logo</a>
-    <ul class="nav offset-md-9">
-      <li class="nav-item ">
-        <a class="nav-link text-white" href="#">Coins </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-white" href="#">Claim </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-white" href="#">Language </a>
-      </li>
-    </ul>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Profile</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <%= "#{"Username: "}#{current_user&.username}" %>
-          </li>
-          <li class="nav-item">
-            <%= "#{"Email: "}#{current_user&.email}" %>
-          </li>
-          <li class="nav-item">
-            <%= "#{"Coins: "}#{current_user&.coins}" %>
-          </li>
-          <li class="nav-item">
-            <button class="btn btn-primary form-control">Cash In Now</button>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Profile</a>
-          </li>
-          <li class="nav-item">
-            <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav>
 
 <div class="card w-50">
   <div class="card-body">
@@ -72,30 +20,11 @@
         <%= link_to "Edit Profile" ,edit_user_registration_path, class:'btn btn-primary form-control' if current_user %>
       </div>
       <div class="col">
-        <a href="#" class="btn btn-primary form-control">Address</a>
+        <%= link_to "Address", users_addresses_path, class:'btn btn-primary form-control' %>
       </div>
     </div>
   </div>
 </div>
-
-<nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-info">
-  <ul class="nav justify-content-center offset-md-5">
-    <li class="nav-item">
-      <a class="nav-link text-white" href="#">Share</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link text-white" href="#">Invite</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link text-white" href="#">Lottery</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link text-white" href="#">Shop</a>
-    </li>
-    <li class="nav-item">
-      <a><%= link_to "Me", users_profile_path, class: "nav-link text-white" %></a>
-    </li>
-  </ul>
-</nav>
+<%= render "users/shared/layout" %>
 
 
