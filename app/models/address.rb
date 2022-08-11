@@ -12,6 +12,24 @@ class Address < ApplicationRecord
   enum genre: [:Home, :Office]
   before_commit :update_default
 
+  before_create :default_first_record
+
+  validate on: :create do |record|
+    record.five_address_only
+  end
+
+  def five_address_only
+    return unless self.user
+    if self.user.addresses.reload.count >= 5
+      errors.add(:base, "Too Many Address")
+    end
+  end
+
+  def default_first_record
+    unless self.user.addresses.present?
+      self.is_default = true
+    end
+  end
 
   def update_default
     if is_default

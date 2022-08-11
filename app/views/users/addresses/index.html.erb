@@ -34,14 +34,13 @@
         <p>Name: <%= add.name %></p>
         <p>Phone Number: <%= add.phone_number %></p>
         <p>Street Address: <%= "#{add.street_address}, #{add.barangay.name}, #{add.city.name}, #{add.province.name}, #{add.region.name}" %></p>
-        <p><%= link_to "Edit" ,edit_users_address_path(add), class:'btn btn-primary' if current_user %></p>
-        <td><%= form_for add, url: users_address_path(add), method: :delete do |f| %>
-            <%= f.submit 'Delete', class:'btn btn-danger'if current_user %>
-          <% end %>
-        </td>
       </div>
+        <%= form_for add, url: users_address_path(add), method: :delete do |f| %>
+            <%= f.submit 'Delete', class:'btn btn-danger'if current_user %>
+        <%= link_to "Edit" ,edit_users_address_path(add), class:'btn btn-primary' if current_user %></p>
+          <% end %>
+        </div>
     </div>
-  </div>
 <% end %>
 <% end %>
 <%= render "users/shared/layout" %>

@@ -56,8 +56,13 @@
       </div>
 
       <div class="form-group">
-        <%= f.check_box :is_default %>
-        <%= f.label :is_default, 'Default' %>
+        <% unless @address.is_default %>
+          <%= f.check_box :is_default %>
+          <%= f.label :is_default, 'Default' %>
+        <% else %>
+          <%= f.check_box :is_default, onclick:"return false;", checked:true%>
+          <%= f.label :is_default, 'Default' %>
+        <% end %>
       </div>
 
       <div class="row">
