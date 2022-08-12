@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>App</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   <style>
       body {
           font-family: "Lato", sans-serif;
@@ -76,50 +82,12 @@
       }
   </style>
 </head>
+
 <body>
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-  <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
-    <i class="fas fa-bars"></i></button>
-  <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-    <div class="input-group">
-      <button class="form-control">Change Language</button>
-    </div>
-  </form>
-  <!-- Navbar-->
-  <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Username</a>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="#!">Profile</a></li>
-        <li>
-          <hr class="dropdown-divider"/>
-        </li>
-        <li><p class="dropdown-item"><%= link_to "LOGOUT", destroy_user_session_path, :method => :delete %></p></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-
-
-<div class="sidenav">
-  <div class="sidenav-top"><p>System Management</p></div>
-  <%= link_to 'Homepage', admin_root_path, class: "nav-link text-white"%>
-  <button class="dropdown-btn">Member Management
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <%= link_to 'User List', admin_home_index_path, class: "nav-link text-white"%>
-    <a href="#">-Item list</a>
-  </div>
-  <button class="dropdown-btn">Example 2 Management
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a href="#">-Example 1</a>
-    <a href="#">-Example 2</a>
-  </div>
-</div>
-
+<%= render 'admin/layouts/nav' %>
+<%= yield %>
+<%= render 'admin/layouts/sidenav' %>
+</body>
 <script>
     /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
     var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -137,5 +105,4 @@
         });
     }
 </script>
-</body>
 </html>

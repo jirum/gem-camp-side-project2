@@ -1,0 +1,18 @@
+<div class="sidenav">
+  <div class="sidenav-top"><p>System Management</p></div>
+  <%= link_to 'Homepage', admin_root_path, class: "nav-link text-white"%>
+  <button class="dropdown-btn">Member Management
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <%= link_to 'User List', admin_home_index_path, class: "nav-link text-white"%>
+    <%= link_to 'Item List', admin_items_path, class: "nav-link text-white"%>
+  </div>
+  <button class="dropdown-btn">Example 2 Management
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="#">-Example 1</a>
+    <a href="#">-Example 2</a>
+  </div>
+</div>

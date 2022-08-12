@@ -1,0 +1,40 @@
+<div class="main">
+<div class="card w-50" style="margin: 0 auto; float: none; margin-top: 70px;">
+  <div class="card-body">
+    <% if @item.errors.any? %>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    <% end %>
+    <div class="form-group">
+      <%= form_for @item, url: admin_items_path, method: :post do |f| %>
+        <%= f.file_field :image, class: 'form-control mt-3', placeholder: 'Image' %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :name, class: 'form-control mt-3', placeholder: 'Name' %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :quantity, class: 'form-control mt-3', placeholder: 'Quantity' %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :minimum_bets, class: 'form-control mt-3', placeholder: 'Minimum Bets' %>
+        </div>
+        <div class="form-group">
+          <%= f.date_field :online_at, class: 'form-control mt-3', placeholder: 'Online At' %>
+        </div>
+        <div class="form-group">
+          <%= f.date_field :offline_at, class: 'form-control mt-3', placeholder: 'Offline At' %>
+        </div>
+        <div class="form-group">
+          <%= f.date_field :start_at, class: 'form-control mt-3', placeholder: 'Start At' %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :status, class: 'form-control mt-3', placeholder: 'Status' %>
+        </div>
+        <div class="form-group">
+          <%= f.submit class: 'btn btn-primary mt-3' %>
+        </div>
+      <% end %>
+      </div>
+</div>
+</div>

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       root :to => 'home#dashboard'
       devise_for :users, controllers: { sessions: 'admin/sessions' }
       resources :home, only: :index
+      resources :items
     end
   end
 end
