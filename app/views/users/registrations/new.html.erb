@@ -17,6 +17,14 @@
               </li>
             </ul>
 
+              <% if cookies[:promoter] %>
+                <div class="form-outline mb-4">
+                  <%= f.label :promoter %><br />
+                  <%= f.text_field :parent_id, value: @promoter, hidden: true %>
+                  <%= f.email_field :psuedo, autofocus: true, autocomplete: "email", value: cookies[:promoter], readonly: true %>
+                </div>
+              <% end %>
+
               <div class="form-outline mb-4">
                 <%= f.label :username %><br/>
                 <%= f.text_field :username, autofocus: true, autocomplete: "username" %>

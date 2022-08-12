@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resource :profile, only: :show
       resources :addresses
     end
+    resources :invites
     root :to => 'home#index'
   end
 
