@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_11_033706) do
+ActiveRecord::Schema.define(version: 2022_08_12_064153) do
 
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.integer "genre"
@@ -84,6 +84,8 @@ ActiveRecord::Schema.define(version: 2022_08_11_033706) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
     t.bigint "parent_id"
+    t.decimal "member_total_deposits", precision: 10
+    t.integer "total_used_coins"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["parent_id"], name: "index_users_on_parent_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
