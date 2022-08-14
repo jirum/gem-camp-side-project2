@@ -26,11 +26,11 @@
   </div>
   <% else %>
 <% current_user.addresses.each do |add| %>
-  <div class="card w-50 mt-3">
-    <div class="card-body">
+  <div class="card w-50 mt-3 mb-3">
+    <div class="card-body" >
       <div class="row">
         <p class="alert"><%= alert %></p>
-        <p><%= add.is_default == true ? 'Default ': ''%><%= add.genre%></p>
+        <strong><p class="text-info"><%= add.is_default? == true ? 'Default ' : '' %><%= add.genre%></p></strong>
         <p>Name: <%= add.name %></p>
         <p>Phone Number: <%= add.phone_number %></p>
         <p>Street Address: <%= "#{add.street_address}, #{add.barangay.name}, #{add.city.name}, #{add.province.name}, #{add.region.name}" %></p>

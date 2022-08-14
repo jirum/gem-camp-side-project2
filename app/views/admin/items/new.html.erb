@@ -1,5 +1,5 @@
 <div class="main">
-<div class="card w-50" style="margin: 0 auto; float: none; margin-top: 70px;">
+<div class="card w-50 bg-light" style="margin: 0 auto; float: none; margin-top: 70px;">
   <div class="card-body">
     <% if @item.errors.any? %>
       <% @item.errors.full_messages.each do |message| %>
@@ -19,20 +19,23 @@
         <div class="form-group">
           <%= f.text_field :minimum_bets, class: 'form-control mt-3', placeholder: 'Minimum Bets' %>
         </div>
-        <div class="form-group">
-          <%= f.date_field :online_at, class: 'form-control mt-3', placeholder: 'Online At' %>
+        <div class="form-floating">
+          <%= f.date_field :online_at, class: 'form-control mt-3' %>
+          <label for="floatingInput">Online At</label>
+        </div>
+        <div class="form-floating">
+          <%= f.date_field :offline_at, class: 'form-control mt-3' %>
+          <label for="floatingInput">Offline At</label>
+        </div>
+        <div class="form-floating">
+          <%= f.date_field :start_at, class: 'form-control mt-3' %>
+          <label for="floatingInput">Start At</label>
         </div>
         <div class="form-group">
-          <%= f.date_field :offline_at, class: 'form-control mt-3', placeholder: 'Offline At' %>
+          <%= f.select(:status, Item.statuses.keys.map {|key| [key.humanize, key]}, { include_blank: 'Please Select Status' }, {class: 'form-control mt-3'})%>
         </div>
-        <div class="form-group">
-          <%= f.date_field :start_at, class: 'form-control mt-3', placeholder: 'Start At' %>
-        </div>
-        <div class="form-group">
-          <%= f.text_field :status, class: 'form-control mt-3', placeholder: 'Status' %>
-        </div>
-        <div class="form-group">
-          <%= f.submit class: 'btn btn-primary mt-3' %>
+        <div class="form-group d-flex">
+          <%= f.submit class: 'btn btn-primary mt-3 mx-auto' %>
         </div>
       <% end %>
       </div>

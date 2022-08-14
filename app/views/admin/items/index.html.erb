@@ -1,43 +1,49 @@
-<div class="main">
-  <h1> Item List </h1>
-  <table class="table table-dark text-center">
-  <thead>
-  <tr>
-    <th scope="col">Image</th>
-    <th scope="col">Name</th>
-    <th scope="col">Quantity</th>
-    <th scope="col">Minimum Bets</th>
-    <th scope="col">State</th>
-    <th scope="col">Batch Count</th>
-    <th scope="col">Online At</th>
-    <th scope="col">Offline At</th>
-    <th scope="col">Start At</th>
-    <th scope="col">Status</th>
-    <th scope="col">Action</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <% @items.each do |item| %>
-      <td><%= image_tag item.image.thumb.url, class:"mx-auto d-block w-100 p-3" if item.image?%></td>
-      <td><%= item.name %></td>
-      <td><%= item.quantity %></td>
-      <td><%= item.minimum_bets %></td>
-      <td><%= item.state %></td>
-      <td><%= item.batch_count %></td>
-      <td><%= item.online_at %></td>
-      <td><%= item.offline_at %></td>
-      <td><%= item.start_at %></td>
-      <td><%= item.status %></td>
-      <td>
-      <%= form_for item, url: admin_item_path(item),style:"display: flex;", method: :delete do |f| %>
-          <%= link_to "Edit" , edit_admin_item_path(item), class:'btn btn-primary'  %>
-          <%= f.submit 'Delete', class:'btn btn-danger d-inline' %>
-        <% end %>
-      </td>
+<div class="center w-75" style="margin: 50px auto">
+  <div class="main">
+    <table class="table table-dark table-striped text-center fs-6">
+      <th colspan="12">Item List</th>
+      <tr class="table-active">
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Minimum Bets</th>
+        <th scope="col">State</th>
+        <th scope="col">Batch Count</th>
+        <th scope="col">Online At</th>
+        <th scope="col">Offline At</th>
+        <th scope="col">Start At</th>
+        <th scope="col">Status</th>
+        <th colspan="2" >Action</th>
       </tr>
-    <% end %>
-    </tbody>
-</table>
-  <%= link_to 'New', new_admin_item_path, class:"btn btn-primary"%>
+      </thead>
+      <% unless @items.exists? %>
+        <td colspan="12">No Item Found</td>
+      <% end %>
+      <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= image_tag item.image.thumb.url, class: "mx-auto d-block w-100 p-3" if item.image? %></td>
+          <td><%= item.name %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.minimum_bets %></td>
+          <td><%= item.state %></td>
+          <td><%= item.batch_count %></td>
+          <td><%= item.online_at %></td>
+          <td><%= item.offline_at %></td>
+          <td><%= item.start_at %></td>
+          <td><%= item.status %></td>
+          <td>
+            <%= form_for item, url: admin_item_path(item), method: :delete do |f| %>
+              <%= link_to "Edit", edit_admin_item_path(item), class: 'btn btn-primary' %>
+              </td>
+              <td>
+              <%= f.submit 'Delete', class: 'btn btn-danger', style:"display: inline-block" %>
+              </td>
+            <% end %>
+            </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= link_to 'New', new_admin_item_path, class: "btn btn-primary" %>
+  </div>
 </div>

@@ -1,15 +1,15 @@
 <nav class="navbar bg-info fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><%= link_to "Project", root_path, class: "nav-link text-white" %></a>
-     <ul class="nav offset-md-9">
+     <ul class="nav ms-auto">
       <% if current_user %>
-        <li class="nav-item ">
+        <li class="nav-item px-2">
           <a class="nav-link text-white" href="#">Coins </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item px-2">
           <a class="nav-link text-white" href="#">Claim </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item px-2">
           <a class="nav-link text-white" href="#">Language </a>
         </li>
        </ul>
@@ -18,7 +18,7 @@
         </button>
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header">
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -50,29 +50,29 @@
    </div>
 </nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-info">
-  <ul class="nav justify-content-center offset-md-5">
-    <li class="nav-item">
+  <ul class="nav justify-content-center mx-auto">
+    <li class="nav-item px-2">
       <a class="nav-link text-white" href="#">Share</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item px-2">
       <%= link_to "Invite", invites_path, class: "nav-link text-white" %>
     </li>
-    <li class="nav-item">
+    <li class="nav-item px-2">
       <a class="nav-link text-white" href="#">Lottery</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item px-2">
       <a class="nav-link text-white" href="#">Shop</a>
-    <li class="nav-item">
+    <li class="nav-item px-2">
       <%= link_to "Me", users_profile_path, class: "nav-link text-white" %>
     </li>
   </ul>
 </nav>
 <% else %>
 <ul class="nav">
-      <li class="nav-item ">
+      <li class="nav-item px-2">
         <%= link_to "Login", new_user_session_path, class: "nav-link active text-white" %>
       </li>
-      <li class="nav-item">
+      <li class="nav-item px-2">
          <%= link_to "Sign Up", new_user_registration_path, class: "nav-link text-white" %>
       </li>
     </ul>
@@ -81,7 +81,7 @@
      </button>
      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
        <div class="offcanvas-header">
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
        </div>
         <div class="offcanvas-body">
          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -93,20 +93,20 @@
     </div>
 </nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-info">
-  <ul class="nav justify-content-center offset-md-5">
-    <li class="nav-item">
+  <ul class="nav justify-content-center mx-auto">
+    <li class="nav-item px-2">
       <a class="nav-link text-white" href="#">Share</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item px-2">
       <%= link_to "Invite", invites_path, class: "nav-link text-white" %>
     </li>
-    <li class="nav-item">
+    <li class="nav-item px-2">
       <a class="nav-link text-white" href="#">Lottery</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item px-2">
       <a class="nav-link text-white" href="#">Shop</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item px-2">
       <a><a class="nav-link text-white" href="#">Language</a></a>
     </li>
   </ul>
