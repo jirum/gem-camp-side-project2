@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       devise_for :users, controllers: { sessions: 'admin/sessions' }
       resources :home, only: :index
       resources :items
+      resources :categories
     end
   end
 end

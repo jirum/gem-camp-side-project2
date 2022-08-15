@@ -9,6 +9,8 @@ class Item < ApplicationRecord
   validates_presence_of :status
   enum status: [:Active, :Inactive]
 
+  belongs_to :category
+
   mount_uploader :image, ImageUploader
   default_scope { where(deleted_at: nil) }
   def destroy
