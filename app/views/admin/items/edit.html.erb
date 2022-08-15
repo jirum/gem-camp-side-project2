@@ -6,8 +6,8 @@
           <li><%= message %></li>
         <% end %>
       <% end %>
-      <div class="form-group">
         <%= form_for @item, url: admin_item_path(@item), method: :patch do |f| %>
+          <div class="form-group">
           <%= f.file_field :image, class: 'form-control mt-3', placeholder: 'Image' %>
           </div>
           <div class="form-group">
