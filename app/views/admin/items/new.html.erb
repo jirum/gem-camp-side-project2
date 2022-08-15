@@ -1,11 +1,11 @@
 <div class="main">
-<div class="card w-50 bg-light" style="margin: 0 auto; float: none; margin-top: 70px;">
-  <div class="card-body">
-    <% if @item.errors.any? %>
-      <% @item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+  <div class="card w-50 bg-light" style="margin: 0 auto; float: none; margin-top: 70px;">
+    <div class="card-body">
+      <% if @item.errors.any? %>
+        <% @item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       <% end %>
-    <% end %>
       <%= form_for @item, url: admin_items_path, method: :post do |f| %>
         <div class="form-group">
           <%= f.file_field :image, class: 'form-control mt-3', placeholder: 'Image' %>
@@ -32,12 +32,15 @@
           <label for="floatingInput">Start At</label>
         </div>
         <div class="form-group">
-          <%= f.select(:status, Item.statuses.keys.map {|key| [key.humanize, key]}, { include_blank: 'Please Select Status' }, {class: 'form-control mt-3'})%>
+          <%= f.select :category_id, Category.all.map { |c| [c.name, c.id] }, { include_blank: 'Please Select Category' }, { class: 'form-control mt-3' } %>
+        </div>
+        <div class="form-group">
+          <%= f.select(:status, Item.statuses.keys.map { |key| [key.humanize, key] }, { include_blank: 'Please Select Status' }, { class: 'form-control mt-3' }) %>
         </div>
         <div class="form-group d-flex">
           <%= f.submit 'Create Item', class: 'btn btn-primary mt-3 mx-auto' %>
         </div>
       <% end %>
-      </div>
-</div>
+    </div>
+  </div>
 </div>
