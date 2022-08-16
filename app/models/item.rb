@@ -16,4 +16,43 @@ class Item < ApplicationRecord
   def destroy
     update(deleted_at: Time.current)
   end
+
+  include AASM
+  aasm column: :state do
+    state :pending, initial: true
+    state :starting, :paused, :ended, :cancelled
+
+    event :start, after: :set_process do
+      transitions from: [:pending, :ended, :cancelled], to: :starting, guards: [:set_process, :greater_than_zero?, :offline_future?, :active?]
+      transitions from: :paused, to: :starting
+    end
+
+    event :pause do
+      transitions from: :starting, to: :paused
+    end
+
+    event :end do
+      transitions from: :starting, to: :ended
+    end
+
+    event :cancel do
+      transitions from: [:starting, :paused], to: :cancelled
+    end
+  end
+
+  def set_process
+    self.update(quantity: self.quantity - 1, batch_count: self.batch_count + 1)
+  end
+
+  def greater_than_zero?
+    quantity > 0
+  end
+
+  def offline_future?
+    offline_at > Time.now
+  end
+
+  def active?
+    status == 'Active'
+  end
 end
