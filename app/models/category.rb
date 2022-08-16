@@ -1,11 +1,13 @@
 class Category < ApplicationRecord
   validates_presence_of :name
 
-  has_many :items, dependent: :restrict_with_error
+  has_many :items
 
   default_scope { where(deleted_at: nil) }
 
   def destroy
-    update(deleted_at: Time.current)
+    unless self.items.present?
+      update(deleted_at: Time.current)
+    end
   end
 end

@@ -30,8 +30,13 @@ class Admin::CategoriesController < AdminController
   end
 
   def destroy
-    @category.destroy
-    redirect_to admin_categories_path
+    if @category.destroy
+      redirect_to admin_categories_path
+      flash[:alert] = "Successfully Deleted"
+    else
+      redirect_to admin_categories_path
+      flash[:alert] = "You cannot delete category once it has at least one item"
+    end
   end
 
   private

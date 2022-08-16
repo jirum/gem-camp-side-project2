@@ -2,6 +2,13 @@
   <div class="main">
     <table class="table table-dark table-striped text-center fs-6">
       <th colspan="3">Category List</th>
+      <% if notice || alert %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <%= notice %>
+          <%= alert %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
       <tr class="table-active">
         <th scope="col">Name</th>
         <th>Action</th>
@@ -16,6 +23,11 @@
           <td><%= category.name %></td>
           <td>
             <%= form_for category, url: admin_category_path(category), method: :delete do |f| %>
+              <% if category.errors.any? %>
+                <% category.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              <% end %>
               <%= link_to "Edit", edit_admin_category_path(category), class: 'btn btn-primary' %>
                 <%= f.submit 'Delete', class: 'btn btn-danger', style:"display: inline-block" %>
               </td>
