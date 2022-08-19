@@ -2,7 +2,9 @@ class Users::AddressesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_own_address, only: [:destroy, :edit, :update]
 
-  def index; end
+  def index
+    @addresses = current_user.addresses
+  end
 
   def new
     @address= Address.new
@@ -11,8 +13,8 @@ class Users::AddressesController < ApplicationController
   def create
     @address = Address.new(address_params)
     @address.user = current_user
-
     if @address.save
+      flash[:notice] = "Successfully Created"
       redirect_to users_addresses_path
     else
       render :new
@@ -23,6 +25,7 @@ class Users::AddressesController < ApplicationController
 
   def update
     if @address.update(address_params)
+      flash[:notice] = "Successfully Updated"
       redirect_to users_addresses_path
     else
       render :edit
@@ -31,10 +34,11 @@ class Users::AddressesController < ApplicationController
 
   def destroy
     if @address.is_default?
-      flash[:alert] = "Action failed"
+      flash[:alert] = "Default Address Cannot Be Deleted"
       redirect_to users_addresses_path
     else
       @address.destroy
+      flash[:notice] = "Successfully Deleted"
       redirect_to users_addresses_path
     end
   end

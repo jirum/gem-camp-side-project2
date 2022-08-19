@@ -1,8 +1,7 @@
 class Address < ApplicationRecord
-  validates_presence_of :name
+  LIMIT = 5
+  validates :name, :street_address, :genre, presence: true
   validates :phone_number, phone: true
-  validates_presence_of :street_address
-  validates_presence_of :genre
   validates_presence_of :is_default, {allow_blank: true}
   belongs_to :region
   belongs_to :province
@@ -19,21 +18,21 @@ class Address < ApplicationRecord
   end
 
   def five_address_only
-    return unless self.user
-    if self.user.addresses.reload.count >= 5
+    return unless user
+    if user.addresses.reload.count >= LIMIT
       errors.add(:base, "Too Many Address")
     end
   end
 
   def default_first_record
-    unless self.user.addresses.present?
+    unless user.addresses.present?
       self.is_default = true
     end
   end
 
   def update_default
     if is_default
-      self.user.addresses.where("id != ?", self.id).update_all(is_default: false)
+      user.addresses.where("id != ?", self.id).update_all(is_default: false)
     end
   end
 end

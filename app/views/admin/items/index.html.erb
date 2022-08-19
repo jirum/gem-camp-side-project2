@@ -1,5 +1,6 @@
 <div class="center w-75" style="margin: 50px auto">
   <div class="main">
+    <%= render 'errors/flash_error'%>
     <table class="table table-dark table-striped text-center fs-6">
       <th colspan="13">Item List</th>
       <tr class="table-active">
@@ -14,10 +15,10 @@
         <th scope="col">Offline At</th>
         <th scope="col">Start At</th>
         <th scope="col">Status</th>
-        <th colspan="2" >Action</th>
+        <th colspan="2">Action</th>
       </tr>
       </thead>
-      <% unless @items.exists? %>
+      <% if @items.blank? %>
         <td colspan="12">No Item Found</td>
       <% end %>
       <tbody>
@@ -25,7 +26,7 @@
         <tr>
           <td><%= image_tag item.image.thumb.url, class: "mx-auto d-block w-150 p-3" if item.image? %></td>
           <td><%= item.name %></td>
-          <td><%= item.category&.name %></td>
+          <td><%= item.category.name %></td>
           <td><%= item.quantity %></td>
           <td><%= item.minimum_bets %></td>
           <td><%= item.state %></td>
@@ -35,14 +36,12 @@
           <td><%= item.start_at %></td>
           <td><%= item.status %></td>
           <td>
-            <%= form_for item, url: admin_item_path(item), method: :delete do |f| %>
-              <%= link_to "Edit", edit_admin_item_path(item), class: 'btn btn-primary' %>
-              </td>
-              <td>
-              <%= f.submit 'Delete', class: 'btn btn-danger', style:"display: inline-block" %>
-              </td>
-            <% end %>
-            </tr>
+            <%= link_to "Edit", edit_admin_item_path(item), class: 'btn btn-primary' %>
+          </td>
+          <td>
+            <%= link_to 'Delete', admin_item_path(item), method: :delete, class: 'btn btn-danger', style: "display: inline-block" %>
+          </td>
+        </tr>
       <% end %>
       </tbody>
     </table>

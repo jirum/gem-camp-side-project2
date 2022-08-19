@@ -10,26 +10,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  \
+# resource.parent = User.find_by_email(cookies[:promoter])
   def create
-    build_resource(sign_up_params)
-    resource.parent_id = User.find_by_email(cookies[:promoter])&.id
-    resource.save
-    yield resource if block_given?
-    if resource.persisted?
-      if resource.active_for_authentication?
-        set_flash_message! :notice, :signed_up
-        sign_up(resource_name, resource)
-        respond_with resource, location: after_sign_up_path_for(resource)
-      else
-        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
-        expire_data_after_sign_in!
-        respond_with resource, location: after_inactive_sign_up_path_for(resource)
-      end
-    else
-      clean_up_passwords resource
-      set_minimum_password_length
-      respond_with resource
-    end
+    params[:user][:parent_id] = User.find_by_email(cookies[:promoter])&.id
   end
 
   def edit; end
@@ -37,19 +21,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     if params[:user][:current_password].present?
       if current_user.update_with_password(password_params)
-        flash[:alert]="Updated successfully!"
+        flash[:notice]= "Updated successfully!"
         sign_in @user, :bypass => true
         redirect_to edit_user_registration_path
       else
-        flash[:error] = 'Oh No! Something Went Wrong in password update field, Please Try Again.'
+        flash[:alert] = 'Oh No! Something Went Wrong in password update field, Please Try Again.'
         render :edit
       end
     else
       if current_user.update(userinfo_params)
-        flash[:alert]="Updated successfully!"
+        flash[:notice]="Updated successfully!"
         redirect_to edit_user_registration_path
       else
-        flash[:error] = 'Oh No! Something Went Wrong, Please Try Again.'
+        flash[:alert] = 'Oh No! Something Went Wrong, Please Try Again.'
         render :edit
       end
     end
@@ -70,6 +54,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def sign_up_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :parent_id)
   end
 end

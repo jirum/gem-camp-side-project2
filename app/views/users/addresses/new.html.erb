@@ -5,74 +5,20 @@
         margin-top: 70px;
     }
 </style>
-
 <div class="card w-50 bg-light">
   <div class="card-body">
-    <% if @address.errors.any? %>
-      <% @address.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    <% end %>
     <div class="row">
       <div class="col">
         <%= link_to "Back", users_addresses_path, class: 'btn btn-primary form-control' if current_user %>
       </div>
       <div class="col"></div>
+      <%= render 'errors/error', model: @address %>
       <%= form_for @address, url: users_addresses_path, method: :post do |f| %>
-      <div class="form-group">
-        <%= f.text_field :name, class: 'form-control mt-3', placeholder: 'Full Name'%>
-      </div>
-
-      <div class="form-group">
-        <%= f.text_field :phone_number, autocomplete: "username", class: 'form-control mt-3', placeholder: 'Phone Number' %>
-      </div>
-
-      <div class="form-group">
-        <%= f.text_field :street_address, autofocus: true, autocomplete: "email", class: 'form-control mt-3', placeholder: 'Street Address' %>
-      </div>
-
-      <div class="form-group">
-        <%= f.select(:genre, Address.genres.keys.map {|key| [key.humanize, key]}, { include_blank: 'Please Select Genre' }, {class: 'form-control mt-3'})%>
-      </div>
-
-      <div class="form-group">
-        <%= f.collection_select :region_id,  Region.order(:id),:id,:name, { include_blank: 'Please Select Region' }, {class: 'form-control mt-3'}%>
-      </div>
-
-      <div class="form-group">
-        <%= f.collection_select :province_id,  Province.order(:id),:id,:name, { include_blank: 'Please Select Province' }, {class: 'form-control mt-3'}%>
-      </div>
-
-      <div class="form-group">
-        <%= f.collection_select :city_id,  City.order(:id),:id,:name, { include_blank: 'Please Select City' }, {class: 'form-control mt-3'}%>
-      </div>
-
-      <div class="form-group">
-        <%= f.collection_select :barangay_id,  Barangay.where('id<=?', 10).order(:id),:id,:name, { include_blank: 'Please Select Barangay' }, {class: 'form-control mt-3'}%>
-      </div>
-
-      <div class="form-group">
-        <%= f.text_area :remark, class:'form-control mt-3'%>
-      </div>
-
-      <div class="form-group">
-        <% unless @address.is_default %>
-          <%= f.check_box :is_default %>
-          <%= f.label :is_default, 'Default' %>
-        <% else %>
-          <%= f.check_box :is_default, onclick:"return false;", checked:true%>
-          <%= f.label :is_default, 'Default' %>
-        <% end %>
-      </div>
-
-      <div class="row">
-        <div class="col">
-          <%= f.submit "Create", class:'btn btn-primary form-control mt-3' %>
-        </div>
-        <% end %>
-      </div>
+        <%= render partial: 'form', locals: { f: f, address: @address } %>
+      <% end %>
     </div>
   </div>
+</div>
 </div>
 
 <%= render "users/shared/layout" %>

@@ -5,6 +5,8 @@ class InvitesController < ApplicationController
 
   def show; end
 
+  private
+
   def set_url
     if current_user
     @url = "#{request.base_url}/users/sign_up?promoter=#{current_user&.email}"
@@ -18,7 +20,7 @@ class InvitesController < ApplicationController
     @svg = qrcode.as_svg(
       color: "000",
       shape_rendering: "crispEdges",
-      module_size: 11,
+      module_size: 9,
       standalone: true,
       use_path: true
     )

@@ -1,13 +1,8 @@
 class Item < ApplicationRecord
-  validates_presence_of :image
-  validates_presence_of :name
-  validates_presence_of :quantity
-  validates_presence_of :minimum_bets
-  validates_presence_of :online_at
-  validates_presence_of :offline_at
-  validates_presence_of :start_at
-  validates_presence_of :status
-  enum status: [:Active, :Inactive]
+  validates :image, :name, :minimum_bets, :online_at, :offline_at, :start_at, :status, presence: true
+  enum status: [:active, :inactive]
+  validates :quantity, numericality: { greater_than: 0 }
+  validates :minimum_bets, numericality: { greater_than: 0 }
 
   belongs_to :category
 
@@ -22,8 +17,8 @@ class Item < ApplicationRecord
     state :pending, initial: true
     state :starting, :paused, :ended, :cancelled
 
-    event :start, after: :set_process do
-      transitions from: [:pending, :ended, :cancelled], to: :starting, guards: [:set_process, :greater_than_zero?, :offline_future?, :active?]
+    event :start do
+      transitions from: [:pending, :ended, :cancelled], to: :starting, after: :set_process, guards: [:greater_than_zero?, :offline_future?, :active?]
       transitions from: :paused, to: :starting
     end
 
@@ -35,7 +30,7 @@ class Item < ApplicationRecord
       transitions from: :starting, to: :ended
     end
 
-    event :cancel do
+    event :cancel, after: :increment_quantity do
       transitions from: [:starting, :paused], to: :cancelled
     end
   end
@@ -52,7 +47,7 @@ class Item < ApplicationRecord
     offline_at > Time.now
   end
 
-  def active?
-    status == 'Active'
+  def increment_quantity
+    self.quantity+=1
   end
 end

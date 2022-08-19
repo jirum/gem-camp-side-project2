@@ -7,16 +7,17 @@ Rails.application.routes.draw do
       resources :addresses
     end
     resources :invites
-    root :to => 'home#index'
+    resources :lottery
+    root to: 'home#index'
   end
 
   constraints(AdminDomainConstraint.new) do
     namespace :admin, path: '' do
-      root :to => 'home#dashboard'
+      root to: 'home#dashboard'
       devise_for :users, controllers: { sessions: 'admin/sessions' }
-      resources :home, only: :index
-      resources :items
-      resources :categories
+      resources :home, path: 'user-list', only: :index
+      resources :items, except: :show
+      resources :categories, except: :show
     end
   end
 end

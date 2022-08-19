@@ -5,22 +5,27 @@
         margin-top: 70px;
     }
 </style>
-
-<div class="card w-50">
+<div class="card" style="width:90vw; max-width:700px">
   <div class="card-body">
-    <p><%= "#{"Username: "}#{current_user&.username}" %></p>
-    <p><%= "#{"Email: "}#{current_user&.email}" %></p>
-    <p><%= "#{"Coins: "}#{current_user&.coins}" %></p>
-
+    <div class="row">
+    <div class="col-2">
+        <%= image_tag current_user.image.thumb.url, class: 'd-flex justify-content-start w-100 rounded-circle' if current_user.image? %>
+    </div>
+    <div class="col-10">
+        <p><%= "#{"Username: "}#{current_user&.username}" %></p>
+        <p><%= "#{"Email: "}#{current_user&.email}" %></p>
+        <p><%= "#{"Coins: "}#{current_user&.coins}" %></p>
+    </div>
     <div class="mb-3">
       <a href="#" class="btn btn-primary form-control">Cash in Now</a>
     </div>
+    </div>
     <div class="row">
       <div class="col">
-        <%= link_to "Edit Profile" ,edit_user_registration_path, class:'btn btn-primary form-control' if current_user %>
+        <%= link_to "Edit Profile", edit_user_registration_path, class: 'btn btn-primary form-control' %>
       </div>
       <div class="col">
-        <%= link_to "Address", users_addresses_path, class:'btn btn-primary form-control' %>
+        <%= link_to "Address", users_addresses_path, class: 'btn btn-primary form-control' %>
       </div>
     </div>
   </div>

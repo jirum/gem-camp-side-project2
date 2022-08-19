@@ -1,12 +1,8 @@
 class Admin::ItemsController < AdminController
-  before_action :authenticate_admin_user!
   before_action :set_item, only: [:destroy, :edit, :update]
 
   def index
-    @items = Item.all
-  end
-
-  def show
+    @items = Item.includes(:category)
   end
 
   def new
@@ -16,6 +12,7 @@ class Admin::ItemsController < AdminController
   def create
     @item = Item.new(item_params)
     if @item.save
+      flash[:notice] = "Successfully Created"
       redirect_to admin_items_path
     else
       render :new
@@ -26,6 +23,7 @@ class Admin::ItemsController < AdminController
 
   def update
     if @item.update(item_params)
+      flash[:notice] = "Successfully Updated"
       redirect_to admin_items_path
     else
       render :edit
@@ -34,13 +32,14 @@ class Admin::ItemsController < AdminController
 
   def destroy
     @item.destroy
+    flash[:alert] = "Successfully Deleted"
     redirect_to admin_items_path
   end
 
   private
 
   def set_item
-    @item = Item.find_by_id(params[:id])
+    @item = Item.find(params[:id])
   end
 
   def item_params

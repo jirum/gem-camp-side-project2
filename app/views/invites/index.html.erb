@@ -1,12 +1,25 @@
-<div class="d-flex justify-content-center" style="margin-top: 100px">
-    <%== @svg %>
+<div class="d-flex justify-content-center" style="margin-top: 120px">
+  <%== @svg %>
 </div>
-<div class="col-md-12 center" style="text-align: center; margin-top: 20px">
-  <%= link_to @url, @url, {style: "border: 1px solid;padding:10px;"} %>
+<div class="card bg-light d-flex m-auto mt-4" style=" text-align: center; width: fit-content">
+  <div id="link" class="text-dark" style="font-style: oblique; padding: 10px">
+    <%= @url %>
+  </div>
+  <button onclick="copy_url()" type="button" class="btn btn-outline-info">Copy Link</button>
 </div>
+<script>
+    function copy_url() {
+        const range = document.createRange();
+        range.selectNode(document.getElementById("link"));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();
+    }
+</script>
 <% unless current_user %>
-  <div class="d-flex justify-content-center">
-    <div class="p-3 mt-3 bg-info text-white">You need to sign up first</div>
+  <div class="d-flex justify-content-center" style="margin-top: 70px">
+    <div class="p-3 bg-info text-white">You need to sign in first</div>
   </div>
 <% end %>
-<%= render "users/shared/layout"%>
+<%= render "users/shared/layout" %>

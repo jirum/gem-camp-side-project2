@@ -13,7 +13,7 @@
         <th scope="col">Phone Number</th>
       </tr>
       </thead>
-      <% unless @users.exists? %>
+      <% if @users.blank? %>
         <td colspan="8">No User Found</td>
       <% end %>
       <tbody>

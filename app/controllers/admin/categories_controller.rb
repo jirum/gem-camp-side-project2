@@ -1,5 +1,4 @@
 class Admin::CategoriesController < AdminController
-  before_action :authenticate_admin_user!
   before_action :set_category, only: [:destroy, :edit, :update]
 
   def index
@@ -13,6 +12,7 @@ class Admin::CategoriesController < AdminController
   def create
     @category = Category.new(category_params)
     if @category.save
+      flash[:notice] = "Successfully Created"
       redirect_to admin_categories_path
     else
       render :new
@@ -23,6 +23,7 @@ class Admin::CategoriesController < AdminController
 
   def update
     if @category.update(category_params)
+      flash[:notice] = "Successfully Updated"
       redirect_to admin_categories_path
     else
       render :edit
@@ -31,18 +32,18 @@ class Admin::CategoriesController < AdminController
 
   def destroy
     if @category.destroy
+      flash[:notice] = "Successfully Deleted"
       redirect_to admin_categories_path
-      flash[:alert] = "Successfully Deleted"
     else
-      redirect_to admin_categories_path
       flash[:alert] = "You cannot delete category once it has at least one item"
+      redirect_to admin_categories_path
     end
   end
 
   private
 
   def set_category
-    @category = Category.find_by_id(params[:id])
+    @category = Category.find(params[:id])
   end
 
   def category_params
