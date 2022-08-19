@@ -3,13 +3,13 @@
     <a class="navbar-brand" href="#"><%= link_to "Project", root_path, class: "nav-link text-white" %></a>
      <ul class="nav ms-auto">
       <% if current_user %>
-        <li class="nav-item px-2">
+        <li class="nav-item m-auto">
           <a class="nav-link text-white" href="#">Coins </a>
         </li>
-        <li class="nav-item px-2">
+        <li class="nav-item  m-auto">
           <a class="nav-link text-white" href="#">Claim </a>
         </li>
-        <li class="nav-item px-2">
+        <li class="nav-item  m-auto">
           <a class="nav-link text-white" href="#">Language </a>
         </li>
        </ul>
@@ -58,7 +58,7 @@
       <%= link_to "Invite", invites_path, class: "nav-link text-white" %>
     </li>
     <li class="nav-item px-2">
-      <a class="nav-link text-white" href="#">Lottery</a>
+      <%= link_to "Lottery", lottery_index_path, class: "nav-link text-white" %>
     </li>
     <li class="nav-item px-2">
       <a class="nav-link text-white" href="#">Shop</a>
@@ -75,6 +75,9 @@
       <li class="nav-item px-2">
          <%= link_to "Sign Up", new_user_registration_path, class: "nav-link text-white" %>
       </li>
+      <li class="nav-item  px-2">
+         <a class="nav-link text-white" href="#">Language </a>
+      </li>
     </ul>
      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -84,9 +87,9 @@
         <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
        </div>
         <div class="offcanvas-body">
-         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <p><a class="nav-link" href="#">Contact Us</a></p>
-            <p><a class="nav-link" href="#">Facebook</a></p>
+         <ul class="navbar-nav mr-auto">
+           <p><li class="nav-item" href="#">Contact Us</li></p>
+           <p><li class="nav-item" href="#">Facebook</li></p>
           </ul>
         </div>
       </div>
@@ -101,13 +104,10 @@
       <%= link_to "Invite", invites_path, class: "nav-link text-white" %>
     </li>
     <li class="nav-item px-2">
-      <a class="nav-link text-white" href="#">Lottery</a>
+      <%= link_to "Lottery", lottery_index_path, class: "nav-link text-white" %>
     </li>
     <li class="nav-item px-2">
       <a class="nav-link text-white" href="#">Shop</a>
-    </li>
-    <li class="nav-item px-2">
-      <a><a class="nav-link text-white" href="#">Language</a></a>
     </li>
   </ul>
 </nav>
