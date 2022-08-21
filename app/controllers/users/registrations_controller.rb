@@ -14,6 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # resource.parent = User.find_by_email(cookies[:promoter])
   def create
     params[:user][:parent_id] = User.find_by_email(cookies[:promoter])&.id
+    super
   end
 
   def edit; end
