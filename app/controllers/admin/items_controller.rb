@@ -31,8 +31,11 @@ class Admin::ItemsController < AdminController
   end
 
   def destroy
-    @item.destroy
-    flash[:alert] = "Successfully Deleted"
+    if @item.destroy
+      flash[:notice] = "Successfully Deleted"
+    else
+      flash[:alert] = "You cannot delete item once it has at least one bet"
+    end
     redirect_to admin_items_path
   end
 

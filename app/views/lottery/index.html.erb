@@ -61,7 +61,7 @@
       <div class="col-4 d-flex align-self-stretch">
         <div class="card shadow-none border-none mb-2">
           <div class="card-body d-flex flex-column">
-            <%= image_tag item.image.url, class: 'd-block h-100' if item.image? %>
+            <%= link_to (image_tag item.image.thumb.url, class: 'd-block h-100' if item.image?), lottery_path(item) %>
             <hr>
             <h6 class="text-start"><%= item.name %></h6>
             <div class="progress">

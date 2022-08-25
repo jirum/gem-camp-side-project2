@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :home, path: 'user-list', only: :index
       resources :items, except: :show
       resources :categories, except: :show
+      resources :bets, only: :index
     end
   end
 end
