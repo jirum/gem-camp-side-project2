@@ -12,9 +12,9 @@
         <%= image_tag current_user.image.thumb.url, class: 'd-flex justify-content-start w-100 rounded-circle' if current_user.image? %>
     </div>
     <div class="col-10">
-        <p><%= "#{"Username: "}#{current_user&.username}" %></p>
-        <p><%= "#{"Email: "}#{current_user&.email}" %></p>
-        <p><%= "#{"Coins: "}#{current_user&.coins}" %></p>
+        <p><%= "#{"Username: "}#{current_user.username}" %></p>
+        <p><%= "#{"Email: "}#{current_user.email}" %></p>
+        <p><%= "#{"Coins: "}#{current_user.coins}" %></p>
     </div>
     <div class="mb-3">
       <a href="#" class="btn btn-primary form-control">Cash in Now</a>

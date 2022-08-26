@@ -1,9 +1,12 @@
 <div class="center w-75" style="margin: 50px auto">
   <div class="main">
-    <%= render 'errors/flash_error'%>
+    <%= render 'errors/flash_error' %>
     <table class="table table-dark table-striped text-center fs-6">
-      <th colspan="13">Item List</th>
-      <tr class="table-active">
+      <thead class="table-active">
+      <tr>
+        <th colspan="13">Item List</th>
+      </tr>
+      <tr>
         <th scope="col">Image</th>
         <th scope="col">Name</th>
         <th scope="col">Category</th>
@@ -24,7 +27,7 @@
       <tbody>
       <% @items.each do |item| %>
         <tr>
-          <td><%= image_tag item.image.thumb.url, class: "mx-auto d-block w-150 p-3" if item.image? %></td>
+          <td><%= image_tag item.image.thumb.url, class: "mx-auto d-block w-100 p-3" if item.image? %></td>
           <td><%= item.name %></td>
           <td><%= item.category.name %></td>
           <td><%= item.quantity %></td>

@@ -1,6 +1,4 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_account_update_params, only: :update
-  before_action :sign_up_params, only: :create
 
   def new
     @promoter = User.find_by_email(cookies[:promoter])&.id
@@ -10,8 +8,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  \
-# resource.parent = User.find_by_email(cookies[:promoter])
   def create
     params[:user][:parent_id] = User.find_by_email(cookies[:promoter])&.id
     super
@@ -48,10 +44,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def password_params
     params.require(:user).permit(:password,:password_confirmation, :current_password, :email, :username, :phone, :image)
-  end
-
-  def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:phone, :username, :image])
   end
 
   def sign_up_params

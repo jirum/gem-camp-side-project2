@@ -1,15 +1,18 @@
 <div class="center w-75" style="margin: 50px auto">
   <div class="main">
     <table class="table table-dark table-striped text-center fs-6">
-      <th colspan="3">Category List</th>
+      <thead class="table-active">
+      <tr>
+        <th colspan="3">Category List</th>
+      </tr>
       <%= render 'errors/flash_error' %>
-      <tr class="table-active">
-        <th scope="col">Name</th>
-        <th>Action</th>
+      <tr>
+      <th>Name</th>
+      <th colspan="2">Action</th>
       </tr>
       </thead>
       <% if @categories.blank? %>
-        <td colspan="12">No Category Found</td>
+        <td colspan="3">No Category Found</td>
       <% end %>
       <tbody>
       <% @categories.each do |category| %>

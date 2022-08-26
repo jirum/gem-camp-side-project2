@@ -3,7 +3,7 @@ class Users::AddressesController < ApplicationController
   before_action :set_own_address, only: [:destroy, :edit, :update]
 
   def index
-    @addresses = current_user.addresses
+    @addresses = current_user.addresses.includes(:region, :province, :city, :barangay)
   end
 
   def new
@@ -33,14 +33,12 @@ class Users::AddressesController < ApplicationController
   end
 
   def destroy
-    if @address.is_default?
-      flash[:alert] = "Default Address Cannot Be Deleted"
-      redirect_to users_addresses_path
-    else
-      @address.destroy
+    if @address.destroy
       flash[:notice] = "Successfully Deleted"
-      redirect_to users_addresses_path
+    else
+      flash[:alert] = @address.errors.full_messages.join(', ')
     end
+    redirect_to users_addresses_path
   end
 
   private

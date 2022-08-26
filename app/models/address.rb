@@ -8,9 +8,9 @@ class Address < ApplicationRecord
   belongs_to :city
   belongs_to :barangay
   belongs_to :user
-  enum genre: [:Home, :Office]
+  enum genre: [:home, :office]
   before_commit :update_default
-
+  before_destroy :validation_destroy
   before_create :default_first_record
 
   validate on: :create do |record|
@@ -33,6 +33,13 @@ class Address < ApplicationRecord
   def update_default
     if is_default
       user.addresses.where("id != ?", self.id).update_all(is_default: false)
+    end
+  end
+
+  def validation_destroy
+    if is_default
+      errors.add(:base, "Default can't be destroyed")
+      throw(:abort)
     end
   end
 end

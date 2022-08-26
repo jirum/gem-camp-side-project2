@@ -35,7 +35,7 @@
           <p>Name: <%= address.name %></p>
           <p>Phone Number: <%= address.phone_number %></p>
           <p>Street
-            Address: <%= "#{address.street_address}, #{address.barangay.name}, #{address.city.name}, #{address.province.name}, #{address.region.name}" %></p>
+            Address: <%= concat_address(address) %></p>
         </div>
         <%= link_to 'Delete', users_address_path(address), method: :delete, class: 'btn btn-danger' %>
         <%= link_to "Edit", edit_users_address_path(address), class: 'btn btn-primary' %></p>
