@@ -48,7 +48,6 @@
     </ul>
   </div>
 </div>
-
 <div class="container" style="margin-bottom: 100px; margin-top: 20px">
   <div class="mb-3">
     <%= link_to 'All', lottery_index_path, class: "category link-info text-decoration-none mx-2" %>
@@ -58,18 +57,20 @@
   </div>
   <div class="row">
     <% @items.each do |item| %>
-      <div class="col-4 d-flex align-self-stretch">
-        <div class="card shadow-none border-none mb-2">
-          <div class="card-body d-flex flex-column">
-            <%= link_to (image_tag item.image.thumb.url, class: 'd-block h-100' if item.image?), lottery_path(item) %>
-            <hr>
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card shadow-none border-none mb-3 overflow-hidden" style="max-height: 350px; height:20vw; min-height: 220px">
+          <div class="overflow-hidden">
+            <%= link_to (image_tag item.image.url, class:'card-img-top img-responsive' if item.image?), lottery_path(item) %>
+          </div>
+          <div class="card-footer flex-column mt-auto">
             <h6 class="text-start"><%= item.name %></h6>
             <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%</div>
+              <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
             </div>
           </div>
         </div>
       </div>
+      <br><br>
     <% end %>
   </div>
 </div>

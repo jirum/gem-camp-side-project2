@@ -1,14 +1,15 @@
 <style>
     .card {
-        margin: 0 auto; /* Added */
-        float: none; /* Added */
-        margin-top: 70px; /* Added */
+        margin: 0 auto;
+        float: none;
+        margin-top: 70px;
+        font-family:'Baloo 2', cursive;
     }
 </style>
-<div class="container" style="max-width:725px; margin-top: 70px">
+<div class="container" style="max-width:725px; margin-top: 70px; margin-bottom: 30px">
   <%= render "errors/flash_error" %>
 </div>
-<div class="card w-50" style="width:90vw; max-width:700px; margin-bottom: 100px">
+<div class="card w-50 bg-light" style="width:90vw; max-width:700px; margin-bottom: 100px">
   <div class="card-body">
     <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
@@ -17,6 +18,7 @@
 
       <div class="form-group">
       <%= image_tag current_user.image.thumb.url, class:'rounded mx-auto d-block' if current_user.image?%>
+      <%= f.label :image %>
       <%= f.file_field :image, class: 'form-control mt-3'%>
       </div>
 

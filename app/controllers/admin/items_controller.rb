@@ -3,6 +3,7 @@ class Admin::ItemsController < AdminController
 
   def index
     @items = Item.includes(:category)
+    @items = @items.where(name: params[:name]) if params[:name].present?
   end
 
   def new

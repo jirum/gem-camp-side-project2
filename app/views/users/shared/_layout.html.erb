@@ -1,16 +1,30 @@
+<style>
+  .label {
+      display: block;
+      color: black;
+      font-size: 12px;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+  }
+</style>
 <nav class="navbar bg-info fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><%= link_to "Project", root_path, class: "nav-link text-white" %></a>
+    <a class="navbar-brand" href="#"><%= link_to root_path, class:'img-fluid' do %>
+        <img alt="logo" src="/logo.png" style="width: 19vw; max-width: 150px">
+      <% end %></a>
      <ul class="nav ms-auto">
       <% if current_user %>
         <li class="nav-item m-auto">
           <a class="nav-link text-white" href="#">Coins </a>
         </li>
-        <li class="nav-item  m-auto">
+        <li class="nav-item m-auto">
           <a class="nav-link text-white" href="#">Claim </a>
         </li>
-        <li class="nav-item  m-auto">
-          <a class="nav-link text-white" href="#">Language </a>
+        <li class="nav-item m-auto">
+          <%= link_to class:'img-fluid' do %>
+            <img alt="logo" src="/globe.svg" style="width: 30px; margin-right: 12px">
+          <% end %>
         </li>
        </ul>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -20,9 +34,9 @@
           <div class="offcanvas-header">
             <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
-          <div class="offcanvas-body">
+          <div class="offcanvas-body" style="font-family:'Baloo 2', cursive;">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <%= image_tag current_user.image.thumb.url, class:"rounded mx-auto d-block w-50 p-3" if current_user.image?%>
+              <%= image_tag current_user.image.thumb.url, class:"d-flex justify-content-start rounded-circle mb-2", style: 'width: 50px' if current_user.image?%>
               <li class="nav-item">
                 <%= "#{"Username: "}#{current_user.username}" %>
               </li>
@@ -49,34 +63,52 @@
      </div>
    </div>
 </nav>
-<nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-info">
-  <ul class="nav justify-content-center mx-auto">
-    <li class="nav-item px-2">
-      <a class="nav-link text-white" href="#">Share</a>
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
+  <ul class="nav mx-auto">
+    <li class="nav-item px-4 px-lg-5">
+      <%= link_to class:'img-fluid' do %>
+        <img alt="logo" src="/share.svg" style="width: 22px; margin-left: 4px">
+      <% end %>
+      <span class="label">Share</span>
     </li>
-    <li class="nav-item px-2">
-      <%= link_to "Invite", invites_path, class: "nav-link text-white" %>
+    <li class="nav-item px-4 px-lg-5">
+      <%= link_to invites_path, class:'img-fluid' do %>
+        <img alt="logo" src="/infinity.svg" style="width: 22px; margin-left: 4px">
+      <% end %>
+      <span class="label">Invite</span>
     </li>
-    <li class="nav-item px-2">
-      <%= link_to "Lottery", lottery_index_path, class: "nav-link text-white" %>
+    <li class="nav-item px-4 px-lg-5">
+      <%= link_to lottery_index_path, class:'img-fluid' do %>
+        <img alt="logo" src="/box2-heart.svg" style="width: 22px; margin-left: 8px">
+      <% end %>
+      <span class="label">Lottery</span>
     </li>
-    <li class="nav-item px-2">
-      <a class="nav-link text-white" href="#">Shop</a>
-    <li class="nav-item px-2">
-      <%= link_to "Me", users_profile_path, class: "nav-link text-white" %>
+    <li class="nav-item px-4 px-lg-5">
+      <%= link_to class:'img-fluid' do %>
+        <img alt="logo" src="/shop.svg" style="width: 22px; margin-left: 3px">
+      <% end %>
+      <span class="label">Shop</span>
+    </li>
+    <li class="nav-item px-4 px-lg-5">
+      <%= link_to users_profile_path, class:'img-fluid' do %>
+        <img alt="logo" src="/person.svg" style="width: 22px; margin-right: 1px">
+      <% end %>
+      <span class="label">Me</span>
     </li>
   </ul>
 </nav>
 <% else %>
 <ul class="nav">
       <li class="nav-item px-2">
-        <%= link_to "Login", new_user_session_path, class: "nav-link active text-white" %>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-dark btn-sm mt-1" %>
       </li>
       <li class="nav-item px-2">
-         <%= link_to "Sign Up", new_user_registration_path, class: "nav-link text-white" %>
+         <%= link_to "Sign Up", new_user_registration_path, class:"btn btn-dark btn-sm mt-1" %>
       </li>
-      <li class="nav-item  px-2">
-         <a class="nav-link text-white" href="#">Language </a>
+      <li class="nav-item px-2 mt-1">
+        <%= link_to class:'img-fluid' do %>
+          <img alt="logo" src="/globe.svg" style="width: 30px; margin-right: 5px">
+        <% end %>
       </li>
     </ul>
          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -86,27 +118,39 @@
            <div class="offcanvas-header">
              <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
            </div>
-           <div class="offcanvas-body">
-             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+           <div class="offcanvas-body" style="font-family:'Baloo 2', cursive;">
+             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" >
                <p><li class="nav-item me-auto" href="#">Contact Us</li></p>
                <p><li class="nav-item me-auto" href="#">Facebook</li></p>
           </ul>
         </div>
      </div>
 </nav>
-<nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-info">
-  <ul class="nav justify-content-center mx-auto">
-    <li class="nav-item px-2">
-      <a class="nav-link text-white" href="#">Share</a>
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
+  <ul class="nav mx-auto">
+    <li class="nav-item px-4 px-lg-5">
+      <%= link_to class:'img-fluid' do %>
+        <img alt="logo" src="/share.svg" style="width: 22px; margin-left: 4px">
+      <% end %>
+      <span class="label"">Share</span>
     </li>
-    <li class="nav-item px-2">
-      <%= link_to "Invite", invites_path, class: "nav-link text-white" %>
+    <li class="nav-item px-4 px-lg-5">
+      <%= link_to invites_path, class:'img-fluid' do %>
+        <img alt="logo" src="/infinity.svg" style="width: 22px; margin-left: 4px">
+      <% end %>
+      <span class="label">Invite</span>
     </li>
-    <li class="nav-item px-2">
-      <%= link_to "Lottery", lottery_index_path, class: "nav-link text-white" %>
+    <li class="nav-item px-4 px-lg-5">
+      <%= link_to lottery_index_path, class:'img-fluid' do %>
+        <img alt="logo" src="/box2-heart.svg" style="width: 22px; margin-left: 8px">
+      <% end %>
+      <span class="label">Lottery</span>
     </li>
-    <li class="nav-item px-2">
-      <a class="nav-link text-white" href="#">Shop</a>
+    <li class="nav-item px-4 px-lg-5">
+      <%= link_to class:'img-fluid' do %>
+        <img alt="logo" src="/shop.svg" style="width: 22px; margin-left: 3px">
+      <% end %>
+      <span class="label">Shop</span>
     </li>
   </ul>
 </nav>

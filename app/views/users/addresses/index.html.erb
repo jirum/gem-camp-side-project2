@@ -3,9 +3,12 @@
         margin: 0 auto;
         float: none;
         margin-top: 70px;
+        width:90vw;
+        max-width:700px;
+        font-family:'Baloo 2', cursive;
     }
 </style>
-<div class="card w-50 border-0" style="width:90vw; max-width:700px">
+<div class="card border-0">
   <div class="row">
     <div class="col">
       <%= link_to "Back", users_profile_path, class: 'btn btn-primary form-control' if current_user %>
@@ -19,7 +22,7 @@
   <%= render "errors/flash_error" %>
 </div>
 <% if @addresses.blank? %>
-  <div class="card w-50 mt-3 text-center">
+  <div class="card mt-3 text-center">
     <div class="card-body align-content-center">
       <div class="row">
         <p>Add Address!</p>
@@ -28,7 +31,7 @@
   </div>
 <% else %>
   <% @addresses.each do |address| %>
-    <div class="card border-info w-50 mt-3 mb-3" style="width:90vw; max-width:700px">
+    <div class="card border-info w-50 mt-3 mb-3 bg-light">
       <div class="card-body">
         <div class="row">
           <b><%= content_tag :div, 'Default', class: 'badge bg-info text-dark me-2 mb-2' if address.is_default? %><%= address.genre %></b>
@@ -37,8 +40,8 @@
           <p>Street
             Address: <%= concat_address(address) %></p>
         </div>
-        <%= link_to 'Delete', users_address_path(address), method: :delete, class: 'btn btn-danger' %>
-        <%= link_to "Edit", edit_users_address_path(address), class: 'btn btn-primary' %></p>
+        <%= link_to 'Delete', users_address_path(address), method: :delete, class: 'btn btn-danger btn-sm' %>
+        <%= link_to "Edit", edit_users_address_path(address), class: 'btn btn-primary btn-sm' %></p>
       </div>
     </div>
   <% end %>

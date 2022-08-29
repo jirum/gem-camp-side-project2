@@ -13,9 +13,9 @@ Rails.application.routes.draw do
 
   constraints(AdminDomainConstraint.new) do
     namespace :admin, path: '' do
-      root to: 'home#dashboard'
+      root to: 'home#index'
       devise_for :users, controllers: { sessions: 'admin/sessions' }
-      resources :home, path: 'user-list', only: :index
+      resources :user_list, only: :index
       resources :items, except: :show
       resources :categories, except: :show
       resources :bets, only: :index

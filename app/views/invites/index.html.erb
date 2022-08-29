@@ -1,5 +1,20 @@
-<div class="d-flex justify-content-center" style="margin-top: 120px">
-  <%== @svg %>
+<% unless current_user %>
+  <div class="d-flex justify-content-center" style="margin-top: 100px; font-family:'Baloo 2', cursive;">
+    <div class="card shadow bg-body rounded border-light" style="width: 370px; padding-left: 70px">
+      <div class="card-body">
+        <strong><p>You need to sign in first</p></strong>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="d-flex justify-content-center" style="margin-top: 100px">
+  <div class="card shadow  mb-5 bg-body rounded border-light">
+    <div class="card-body">
+      <div class="img-fluid">
+        <%== @svg %>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="card bg-light d-flex m-auto mt-4" style=" text-align: center; width: fit-content">
   <div id="link" class="text-dark" style="font-style: oblique; padding: 10px">
@@ -17,9 +32,4 @@
         window.getSelection().removeAllRanges();
     }
 </script>
-<% unless current_user %>
-  <div class="d-flex justify-content-center" style="margin-top: 70px">
-    <div class="p-3 bg-info text-white">You need to sign in first</div>
-  </div>
-<% end %>
 <%= render "users/shared/layout" %>

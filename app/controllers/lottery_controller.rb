@@ -2,9 +2,10 @@ class LotteryController < ApplicationController
   before_action :authenticate_user!, only: :create
 
   def index
-    @category = Category.find_by_name(params[:category])
     @items = Item.active.starting
-    @items = @items.where(category_id: @category.id) if params[:category]
+    if params[:category]
+    @items = @items.includes(:category).where(category: {name: params[:category]})
+    end
     @categories = Category.all
   end
 

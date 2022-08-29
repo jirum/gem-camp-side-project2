@@ -3,6 +3,7 @@ class Admin::CategoriesController < AdminController
 
   def index
     @categories = Category.all
+    @categories = @categories.where(name: params[:name]) if params[:name].present?
   end
 
   def new
