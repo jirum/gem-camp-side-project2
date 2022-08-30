@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       resources :items, except: :show
       resources :categories, except: :show
       resources :bets, only: :index
+      resources :winners, only: :index do
+        put :submit, :pay, :ship, :deliver, :publish, :remove_publish
+      end
     end
   end
 end
