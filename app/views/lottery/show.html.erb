@@ -16,7 +16,8 @@
       <hr>
       <h6 class="text-start"><%= @item.name %></h6>
       <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+        <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: <%= progress(@item) %>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><%= progress(@item) %>%
+        </div>
       </div>
       <%= form_for @bet, url: lottery_index_path, method: :post do |f| %>
         <div class="form-group mt-3">

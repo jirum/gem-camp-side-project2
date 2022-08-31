@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   validates :image, :name, :minimum_bets, :online_at, :offline_at, :start_at, :status, presence: true
   enum status: [:active, :inactive]
-  validates :quantity, numericality: { greater_than: 0 }
+  validates :quantity, numericality: { greater_than_or_equal_to: 0 }
   validates :minimum_bets, numericality: { greater_than: 0 }
 
   belongs_to :category

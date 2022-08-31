@@ -20,7 +20,6 @@
       <tr>
         <th colspan="3">Category List</th>
       </tr>
-      <%= render 'errors/flash_error' %>
       <tr>
         <th>Name</th>
         <th colspan="2">Action</th>
@@ -35,7 +34,7 @@
           <td><%= category.name %></td>
           <td>
             <%= link_to "Edit", edit_admin_category_path(category), class: 'btn btn-primary' %>
-            <%= link_to 'Delete', admin_category_path(category), method: :delete, class: 'btn btn-danger', style: "display: inline-block" %>
+            <%= link_to 'Delete', admin_category_path(category), method: :delete, class: 'btn btn-danger', style: "display: inline-block", data: {confirm: 'Are you sure?'} %>
           </td>
       <% end %>
       </tr>

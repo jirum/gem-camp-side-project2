@@ -12,38 +12,56 @@ class Admin::WinnersController < AdminController
 
   def submit
     if @winner.submit!
-      redirect_to admin_winners_path
+      flash[:notice] = "Successfully Submit"
+    else
+      flash[:alert] = "Failed to Submit"
     end
+    redirect_to admin_winners_path
   end
 
   def pay
     if @winner.pay!
-      redirect_to admin_winners_path
+      flash[:notice] = "Successfully Pay"
+    else
+      flash[:alert] = "Failed to Pay"
     end
+    redirect_to admin_winners_path
   end
 
   def ship
     if @winner.ship!
-      redirect_to admin_winners_path
+      flash[:notice] = "Successfully Ship"
+    else
+      flash[:alert] = "Failed to Ship"
     end
+    redirect_to admin_winners_path
   end
 
   def deliver
     if @winner.deliver!
-      redirect_to admin_winners_path
+      flash[:notice] = "Successfully Deliver"
+    else
+      flash[:alert] = "Failed to Deliver"
     end
+    redirect_to admin_winners_path
   end
 
   def publish
     if @winner.publish!
-      redirect_to admin_winners_path
+      flash[:notice] = "Successfully Publish"
+    else
+      flash[:alert] = "Failed to Publish"
     end
+    redirect_to admin_winners_path
   end
 
   def remove_publish
     if @winner.remove_publish!
-      redirect_to admin_winners_path
+      flash[:notice] = "Successfully Remove Publish"
+    else
+      flash[:alert] = "Remove Publish"
     end
+    redirect_to admin_winners_path
   end
 
   private

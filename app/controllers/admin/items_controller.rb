@@ -1,5 +1,5 @@
 class Admin::ItemsController < AdminController
-  before_action :set_item, only: [:destroy, :edit, :update]
+  before_action :set_item, only: [:destroy, :edit, :update, :start, :pause, :end, :cancel]
 
   def index
     @items = Item.includes(:category)
@@ -40,10 +40,40 @@ class Admin::ItemsController < AdminController
     redirect_to admin_items_path
   end
 
+  def start
+    if @item.start!
+      flash[:notice] = "Successfully Start"
+    else
+      flash[:alert] = @item.errors.full_messages.join(', ')
+    end
+    redirect_to admin_items_path
+  end
+
+  def pause
+    if @item.pause!
+      flash[:notice] = "Successfully Paused"
+      redirect_to admin_items_path
+    end
+  end
+
+  def end
+    if @item.end!
+      flash[:notice] = "Successfully End"
+      redirect_to admin_items_path
+    end
+  end
+
+  def cancel
+    if @item.cancel!
+      flash[:notice] = "Successfully Cancel"
+      redirect_to admin_items_path
+    end
+  end
+
   private
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:item_id] || params[:id])
   end
 
   def item_params
