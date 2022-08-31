@@ -31,7 +31,7 @@ class Item < ApplicationRecord
     end
 
     event :end do
-      transitions from: :starting, to: :ended
+      transitions from: [:starting, :paused], to: :ended, after: :pick_winner, guard: :reach_minimum_bets
     end
 
     event :cancel, after: [:increment_quantity, :bet_cancel] do
@@ -56,7 +56,20 @@ class Item < ApplicationRecord
   end
 
   def bet_cancel
-    bets.where(batch_count: batch_count).each { |bet| bet.cancel! }
+    bets.where(batch_count: batch_count).where.not(state: :cancelled).each { |bet| bet.cancel! }
+  end
+
+  def reach_minimum_bets
+    bets.where(batch_count: batch_count).size >= minimum_bets
+  end
+
+  def pick_winner
+    bets = bets.where(batch_count: batch_count).where.not(state: :cancelled)
+    winner = bets.sample
+    winner.win!
+    item_bets.where.not(state: :won).update(state: :lost)
+    won = Winner.new(item_batch_count: winner.batch_count, user: winner.user, item: winner.item, bet: winner, address: winner.user.addresses.find_by(is_default: true))
+    won.save!
   end
 end
 
