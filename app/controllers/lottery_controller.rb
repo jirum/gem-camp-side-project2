@@ -2,7 +2,7 @@ class LotteryController < ApplicationController
   before_action :authenticate_user!, only: :create
 
   def index
-    @items = Item.active.starting.where('quantity > ?', 0)
+    @items = Item.active.starting
     if params[:category]
       @items = @items.includes(:category).where(category: { name: params[:category] })
     end
@@ -10,7 +10,7 @@ class LotteryController < ApplicationController
   end
 
   def show
-    if @item = Item.active.starting.where('quantity > ?', 0).find_by_id(params[:id])
+    if @item = Item.active.starting.find_by_id(params[:id])
       @bet = Bet.new
       @bets = @item.bets.where(user: current_user).where(batch_count: @item.batch_count)
     else
