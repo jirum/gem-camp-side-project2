@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       resources :winners, only: :index do
         put :submit, :pay, :ship, :deliver, :publish, :remove_publish
       end
+      resources :offers
     end
   end
 end
