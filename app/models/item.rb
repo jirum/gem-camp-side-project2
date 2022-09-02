@@ -67,7 +67,7 @@ class Item < ApplicationRecord
     bets = bets.where(batch_count: batch_count).where.not(state: :cancelled)
     winner = bets.sample
     winner.win!
-    item_bets.where.not(state: :won).update(state: :lost)
+    bets.where.not(state: :won).update(state: :lost)
     won = Winner.new(item_batch_count: winner.batch_count, user: winner.user, item: winner.item, bet: winner, address: winner.user.addresses.find_by(is_default: true))
     won.save!
   end
