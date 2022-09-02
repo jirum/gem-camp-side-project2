@@ -52,22 +52,28 @@ class Admin::ItemsController < AdminController
   def pause
     if @item.pause!
       flash[:notice] = "Successfully Paused"
-      redirect_to admin_items_path
+    else
+      flash[:alert] = @item.errors.full_messages.join(', ')
     end
+    redirect_to admin_items_path
   end
 
   def end
     if @item.end!
       flash[:notice] = "Successfully End"
-      redirect_to admin_items_path
+    else
+      flash[:alert] = @item.errors.full_messages.join(', ')
     end
+    redirect_to admin_items_path
   end
 
   def cancel
     if @item.cancel!
       flash[:notice] = "Successfully Cancel"
-      redirect_to admin_items_path
+    else
+      flash[:alert] = @item.errors.full_messages.join(', ')
     end
+    redirect_to admin_items_path
   end
 
   private

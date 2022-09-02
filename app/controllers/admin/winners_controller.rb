@@ -14,7 +14,7 @@ class Admin::WinnersController < AdminController
     if @winner.submit!
       flash[:notice] = "Successfully Submit"
     else
-      flash[:alert] = "Failed to Submit"
+      flash[:alert] = @winner.errors.full_messages.join(', ')
     end
     redirect_to admin_winners_path
   end
@@ -23,7 +23,7 @@ class Admin::WinnersController < AdminController
     if @winner.pay!
       flash[:notice] = "Successfully Pay"
     else
-      flash[:alert] = "Failed to Pay"
+      flash[:alert] = @winner.errors.full_messages.join(', ')
     end
     redirect_to admin_winners_path
   end
@@ -32,7 +32,7 @@ class Admin::WinnersController < AdminController
     if @winner.ship!
       flash[:notice] = "Successfully Ship"
     else
-      flash[:alert] = "Failed to Ship"
+      flash[:alert] = @winner.errors.full_messages.join(', ')
     end
     redirect_to admin_winners_path
   end
@@ -41,7 +41,7 @@ class Admin::WinnersController < AdminController
     if @winner.deliver!
       flash[:notice] = "Successfully Deliver"
     else
-      flash[:alert] = "Failed to Deliver"
+      flash[:alert] = @winner.errors.full_messages.join(', ')
     end
     redirect_to admin_winners_path
   end
@@ -50,7 +50,7 @@ class Admin::WinnersController < AdminController
     if @winner.publish!
       flash[:notice] = "Successfully Publish"
     else
-      flash[:alert] = "Failed to Publish"
+      flash[:alert] = @winner.errors.full_messages.join(', ')
     end
     redirect_to admin_winners_path
   end
@@ -59,7 +59,7 @@ class Admin::WinnersController < AdminController
     if @winner.remove_publish!
       flash[:notice] = "Successfully Remove Publish"
     else
-      flash[:alert] = "Remove Publish"
+      flash[:alert] = @winner.errors.full_messages.join(', ')
     end
     redirect_to admin_winners_path
   end
