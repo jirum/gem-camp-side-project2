@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     end
     resources :invites
     resources :lottery
+    resources :shop, only: :index do
+      post :new_order
+    end
     root to: 'home#index'
   end
 

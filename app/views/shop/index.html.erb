@@ -1,0 +1,75 @@
+<style xmlns="http://www.w3.org/1999/html">
+    .marquee {
+        overflow: hidden;
+        background-color: #000;
+    }
+
+    .category:active {
+        background-color: yellow;
+    }
+</style>
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner" style="height: 50vh">
+    <div class="carousel-item active">
+      <img src="la.jpeg" class="d-block mx-auto" alt="guitar">
+    </div>
+    <div class="carousel-item">
+      <img src="ny.jpeg" class="d-block mx-auto" alt="drums">
+    </div>
+    <div class="carousel-item">
+      <img src="chicago.jpeg" class="d-block mx-auto" alt="car">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<div class="marquee" data-controller="marquee">
+  <div class="wrap wrap-padding">
+    <ul id="marquee" class="marquee-list" data-marquee-target="marquee" style="padding-top: 7px; height: 25px">
+      <marquee class="text-light"><h5 style=""> Announcement! </h5></marquee>
+    </ul>
+  </div>
+</div>
+<%= render "errors/flash_error" %>
+<div class="container" style="margin-bottom: 100px; margin-top: 20px">
+  <div class="row">
+    <% @offers.each do |offer| %>
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card shadow-none border-none mb-3 overflow-hidden" style="max-height: 250px; height:20vw; min-height: 220px">
+          <div class="overflow-hidden">
+            <a data-bs-toggle="modal" data-bs-target="#staticBackdrop<%= offer.id %>">
+              <%= image_tag offer.image.url, class: 'card-img-top img-responsive' if offer.image? %>
+            </a>
+            <div class="modal fade" id="staticBackdrop<%= offer.id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-body">
+                      <h5 class="modal-title" id="staticBackdropLabel">Do you want to pay: <%= offer.amount %></h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">and get <%= offer.coin %> coins</h5>
+                    <div style="float:right">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <%= link_to 'Confirm', shop_new_order_path(offer), class:'btn btn-primary', method: :post%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br><br>
+    <% end %>
+  </div>
+</div>
+<%= render "users/shared/layout" %>
