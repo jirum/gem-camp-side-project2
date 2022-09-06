@@ -51,7 +51,7 @@
           <td><%= offer.coin %></td>
           <td>
             <%= link_to "Edit", edit_admin_offer_path(offer), class: 'btn btn-primary col-9 mt-3' %>
-            <%= link_to 'Delete', admin_offers_path(offer), method: :delete, class: 'btn btn-danger mt-2 col-9 mt-3', style: "display: inline-block", data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Delete', admin_offer_path(offer), method: :delete, class: 'btn btn-danger mt-2 col-9 mt-3', style: "display: inline-block", data: { confirm: 'Are you sure?' } %>
           </td>
         </tr>
       <% end %>

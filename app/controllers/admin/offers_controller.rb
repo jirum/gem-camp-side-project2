@@ -25,9 +25,9 @@ class Admin::OffersController < AdminController
     if @offer.destroy
       flash[:notice] = "Successfully Deleted"
     else
-      flash[:alert] = " Destroy Failed"
-      redirect_to admin_items_path
+      flash[:alert] = @offer.errors.full_messages.join(', ')
     end
+    redirect_to admin_offers_path
   end
 
   def edit; end
