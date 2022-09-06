@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :addresses
   has_many :bets
+  has_many :orders
 
   validates_uniqueness_of :username
   validates :phone, phone: {allow_blank: true}
