@@ -29,9 +29,9 @@ class Order < ApplicationRecord
 
   def update_coins_if_to_pay
     if !deduct?
-      user.coins.update(coins: user.coins + coin)
+      user.update(coins: user.coins + coin)
     else
-      user.coins.update(coins: user.coins - coin)
+      user.update(coins: user.coins - coin)
     end
   end
 
