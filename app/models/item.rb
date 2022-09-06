@@ -6,12 +6,16 @@ class Item < ApplicationRecord
 
   belongs_to :category
   has_many :bets
+  has_many :winners
 
   mount_uploader :image, ImageUploader
   default_scope { where(deleted_at: nil) }
 
   def destroy
-    unless self.bets.present?
+    if self.bets.present?
+      errors.add(:base, "You cannot delete item once it has at least one bet")
+      return false
+    else
       update(deleted_at: Time.current)
     end
   end
@@ -64,11 +68,11 @@ class Item < ApplicationRecord
   end
 
   def pick_winner
-    bets = bets.where(batch_count: batch_count).where.not(state: :cancelled)
+    bets = bets.where(batch_count: batch_count).betting
     winner = bets.sample
     winner.win!
-    bets.where.not(state: :won).update(state: :lost)
-    won = Winner.new(item_batch_count: winner.batch_count, user: winner.user, item: winner.item, bet: winner, address: winner.user.addresses.find_by(is_default: true))
+    bets.where.not(state: :won).each { |bet| bet.lose! }
+    won = Winner.new(item_batch_count: winner.batch_count, user: winner.user, item: winner.item, bet: winner)
     won.save!
   end
 end

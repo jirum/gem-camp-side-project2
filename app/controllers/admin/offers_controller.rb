@@ -22,9 +22,12 @@ class Admin::OffersController < AdminController
   end
 
   def destroy
-    @offer.destroy
-    flash[:notice] = "Successfully Deleted"
-    redirect_to admin_items_path
+    if @offer.destroy
+      flash[:notice] = "Successfully Deleted"
+    else
+      flash[:alert] = " Destroy Failed"
+      redirect_to admin_items_path
+    end
   end
 
   def edit; end

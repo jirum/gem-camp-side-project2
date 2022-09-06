@@ -1,5 +1,5 @@
 class Admin::ItemsController < AdminController
-  before_action :set_item, only: [:destroy, :edit, :update, :start, :pause, :end, :cancel]
+  before_action :set_item, except: [:index, :new, :create]
 
   def index
     @items = Item.includes(:category)
@@ -35,7 +35,7 @@ class Admin::ItemsController < AdminController
     if @item.destroy
       flash[:notice] = "Successfully Deleted"
     else
-      flash[:alert] = "You cannot delete item once it has at least one bet"
+      flash[:alert] = @item.errors.full_messages.join(', ')
     end
     redirect_to admin_items_path
   end

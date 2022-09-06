@@ -10,12 +10,9 @@ class LotteryController < ApplicationController
   end
 
   def show
-    if @item = Item.active.starting.find_by_id(params[:id])
-      @bet = Bet.new
-      @bets = @item.bets.where(user: current_user).where(batch_count: @item.batch_count)
-    else
-      not_found
-    end
+    @item = Item.active.starting.find(params[:id])
+    @bet = Bet.new
+    @bets = @item.bets.where(user: current_user).where(batch_count: @item.batch_count)
   end
 
   def create
@@ -42,6 +39,6 @@ class LotteryController < ApplicationController
   private
 
   def bet_params
-    params.require(:bet).permit(:coins, :item_id, :batch_count)
+    params.require(:bet).permit(:coins, :item_id)
   end
 end

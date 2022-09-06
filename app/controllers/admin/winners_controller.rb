@@ -1,5 +1,5 @@
 class Admin::WinnersController < AdminController
-  before_action :set_winner, only: [:submit, :pay, :ship, :deliver, :publish, :remove_publish]
+  before_action :set_winner, except: :index
 
   def index
     @winners = Winner.includes(:user, :item, :bet, :address)
