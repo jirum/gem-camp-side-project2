@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
     resources :invites
     resources :lottery
+    resources :winner_experience, only: [:show, :index]
     resources :shop, only: :index do
       post :new_order
     end

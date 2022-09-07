@@ -1,0 +1,14 @@
+<div class="container" style="width:90vw; max-width:700px; margin-top: 70px; margin-bottom: 70px">
+  <div class="card bg-light">
+    <div class="card-body">
+      <div class="w-100 overflow-hidden" style="aspect-ratio: 1 / 1">
+        <%= image_tag @winner.picture.thumb.url, class: 'img-responsive w-100 h-100', style: 'object-fit: cover;' if @winner.picture? %>
+      </div>
+      <div style="margin-top: 20px">
+        <p>Username: <%= @winner.user.username %></p>
+        <p>Comment: <%= @winner.comment %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render "users/shared/layout" %>
