@@ -1,0 +1,25 @@
+<div class="container" style="width:90vw; max-width:700px; margin-top: 70px">
+  <%= render "errors/flash_error" %>
+  <div class="card bg-light" style="font-family:'Baloo 2', cursive;">
+    <div class="card-header text-white text-center" style="background-color:#008080; font-size: 25px;">Share Your
+      Experience
+    </div>
+    <div class="card-body">
+      <%= form_for @winner, url: users_share_path(@winner), method: :put do |f| %>
+        <div class="form-group">
+          <%= image_tag @winner.picture.thumb.url, class:'rounded mx-auto d-block' if @winner.picture? %>
+          <%= f.label :picture, class: 'fs-6 mt-2' %>
+          <%= f.file_field :picture, class: 'form-control mt-3', placeholder: 'Image' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :comment, class: 'fs-6 mt-2' %>
+          <%= f.text_area :comment, class: 'form-control mt-3' %>
+        </div>
+        <div class="form-group d-flex">
+          <%= f.submit class: 'btn btn-primary mt-3 mx-auto' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= render "users/shared/layout" %>

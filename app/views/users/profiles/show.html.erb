@@ -34,49 +34,42 @@
   <% @orders&.each do |order| %>
     <div class="card border-info mt-3 mb-3 bg-light">
       <div class="card-body">
-        <div class="row">
-          <p>Serial Number: <%= order.serial_number %></p>
-          <p>Amount: <%= order.amount %></p>
-          <p>Coin: <%= order.coin %></p>
-          <p>Created At: <%= order.created_at %></p>
-          <p>State: <%= order.state %></p>
-        </div>
+        <p>Serial Number: <%= order.serial_number %></p>
+        <p>Amount: <%= order.amount %></p>
+        <p>Coin: <%= order.coin %></p>
+        <p>Created At: <%= order.created_at %></p>
+        <p>State: <%= order.state %></p>
       </div>
     </div>
   <% end %>
   <% @bets&.each do |bet| %>
     <div class="card border-info mt-3 mb-3 bg-light">
       <div class="card-body">
-        <div class="row">
-          <p>Serial Number: <%= bet.serial_number %></p>
-          <p>Item Name: <%= bet.item.name %></p>
-          <p>Email: <%= bet.user.email %></p>
-          <p>State: <%= bet.state %></p>
-          <p>Created At: <%= bet.created_at %></p>
-        </div>
+        <p>Serial Number: <%= bet.serial_number %></p>
+        <p>Item Name: <%= bet.item.name %></p>
+        <p>Email: <%= bet.user.email %></p>
+        <p>State: <%= bet.state %></p>
+        <p>Created At: <%= bet.created_at %></p>
       </div>
     </div>
   <% end %>
   <% @winners&.each do |winner| %>
     <div class="card border-info mt-3 mb-3 bg-light">
       <div class="card-body">
-        <div class="row">
-          <p>Serial Number: <%= winner.bet.serial_number %></p>
-          <p>Email: <%= winner.user.email %></p>
-          <p>State: <%= winner.state %></p>
-          <p>Created At: <%= winner.created_at %></p>
-          <p><%= link_to 'Claim', users_winner_path(winner), class: 'btn btn-primary btn-sm' if winner.won? %></p>
-        </div>
+        <p>Serial Number: <%= winner.bet.serial_number %></p>
+        <p>Email: <%= winner.user.email %></p>
+        <p>State: <%= winner.state %></p>
+        <p>Created At: <%= winner.created_at %></p>
+        <p><%= link_to 'Share', users_share_path(winner), class: 'btn btn-primary btn-sm me-3' if winner.delivered? %></p>
+        <p><%= link_to 'Claim', users_winner_path(winner), class: 'btn btn-primary btn-sm' if winner.won? %></p>
       </div>
     </div>
   <% end %>
   <% @invitations&.each do |invitation| %>
     <div class="card border-info mt-3 mb-3 bg-light">
       <div class="card-body">
-        <div class="row">
-          <p>Username: <%= invitation.username %></p>
-          <p>Email: <%= invitation.email %></p>
-        </div>
+        <p>Username: <%= invitation.username %></p>
+        <p>Email: <%= invitation.email %></p>
       </div>
     </div>
   <% end %>

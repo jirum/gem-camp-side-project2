@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resource :profile, only: :show
       resources :addresses
       resources :winners, only: [:show, :update]
+      resources :shares,  only: [:show, :update]
     end
     resources :invites
     resources :lottery
