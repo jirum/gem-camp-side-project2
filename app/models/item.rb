@@ -68,12 +68,12 @@ class Item < ApplicationRecord
   end
 
   def pick_winner
-    bets = bets.where(batch_count: batch_count).betting
-    winner = bets.sample
-    winner.win!
-    bets.where.not(state: :won).each { |bet| bet.lose! }
-    won = Winner.new(item_batch_count: winner.batch_count, user: winner.user, item: winner.item, bet: winner)
-    won.save!
+    betting_bets = bets.where(batch_count: batch_count).betting
+    winning_bet = betting_bets.sample
+    winning_bet.win!
+    betting_bets.where.not(state: :won).each {|bet| bet.lose!}
+    winner = Winner.new(item_batch_count: winning_bet.batch_count, user: winning_bet.user, item:winning_bet.item, bet: winning_bet)
+    winner.save!
   end
 end
 
