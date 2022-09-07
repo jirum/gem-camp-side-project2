@@ -1,0 +1,42 @@
+<style>
+    .card {
+        margin: 0 auto;
+        float: none;
+        margin-top: 70px;
+    }
+</style>
+<div class="container" style="width:90vw; max-width:700px;">
+  <div class="card bg-light" style="font-family:'Baloo 2', cursive;">
+    <div class="card-header text-white text-center" style="background-color:#008080; font-size: 25px;">Claim Prize</div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <p style="font-size: 25px">Bet Winner</p>
+        <li class="list-group-item">
+          <p>Item: <%= @winner.bet.item.name %></p>
+          <p>Serial Number: <%= @winner.bet.serial_number %></p>
+          <p>Email: <%= @winner.user.email %></p>
+          <p>State: <%= @winner.state %></p>
+          <p>Created At: <%= @winner.created_at %></p>
+        </li>
+        <%= form_for @winner, url: users_winner_path(@winner), method: :patch do |f| %>
+          <p style="font-size: 25px; margin-top: 20px">Select Address</p>
+          <% current_user.addresses.each do |address| %>
+            <li class="list-group-item">
+              <%= f.radio_button :address, address.id, checked: address.is_default %>
+              <p>
+                <b><%= content_tag :div, 'Default', class: 'badge bg-info text-dark me-2 mb-2' if address.is_default? %><%= address.genre %></b>
+              </p>
+              <p>Name: <%= address.name %></p>
+              <p>Phone Number: <%= address.phone_number %></p>
+              <p>Street Address: <%= concat_address(address) %></p>
+          <% end %>
+          </li>
+          <%= link_to 'Back', users_profile_path(current_user), class: 'btn btn-primary mt-3 ms-auto' %>
+          <%= f.submit class: 'btn btn-primary mt-3 ms-auto'%>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <br><br><br>
+</div>
+<%= render "users/shared/layout" %>

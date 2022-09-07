@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :users do
       resource :profile, only: :show
       resources :addresses
+      resources :winners, only: [:show, :update]
     end
     resources :invites
     resources :lottery

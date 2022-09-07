@@ -1,11 +1,5 @@
-<style>
-    .card {
-        margin: 0 auto;
-        float: none;
-        margin-top: 70px;
-    }
-</style>
-<div class="container" style="width:90vw; max-width:700px;">
+<div class="container" style="width:90vw; max-width:700px; margin-top: 70px">
+  <%= render "errors/flash_error" %>
   <div class="card bg-light" style="font-family:'Baloo 2', cursive;">
     <div class="card-body">
       <div class="row">
@@ -71,6 +65,7 @@
           <p>Email: <%= winner.user.email %></p>
           <p>State: <%= winner.state %></p>
           <p>Created At: <%= winner.created_at %></p>
+          <p><%= link_to 'Claim', users_winner_path(winner), class: 'btn btn-primary btn-sm' if winner.won? %></p>
         </div>
       </div>
     </div>
