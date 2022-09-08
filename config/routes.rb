@@ -7,6 +7,9 @@ Rails.application.routes.draw do
       resources :addresses
       resources :winners, only: [:show, :update]
       resources :shares,  only: [:show, :update]
+      scope :orders, as: :orders do
+        put 'cancel/:id', as: :cancel, to: 'orders#cancel'
+      end
     end
     resources :invites
     resources :lottery

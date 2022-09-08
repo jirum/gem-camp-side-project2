@@ -39,6 +39,7 @@
         <p>Coin: <%= order.coin %></p>
         <p>Created At: <%= order.created_at %></p>
         <p>State: <%= order.state %></p>
+        <p><%= link_to 'Cancel', users_orders_cancel_path(order), class: 'btn btn-danger btn-sm me-3', data: { confirm: 'Are you sure?' }, method: :put if order.submitted? %></p>
       </div>
     </div>
   <% end %>
@@ -60,8 +61,8 @@
         <p>Email: <%= winner.user.email %></p>
         <p>State: <%= winner.state %></p>
         <p>Created At: <%= winner.created_at %></p>
-        <p><%= link_to 'Share', users_share_path(winner), class: 'btn btn-primary btn-sm me-3' if winner.delivered? %></p>
-        <p><%= link_to 'Claim', users_winner_path(winner), class: 'btn btn-primary btn-sm' if winner.won? %></p>
+        <p><%= link_to 'Share', users_share_path(winner), data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-sm me-3' if winner.delivered? %></p>
+        <p><%= link_to 'Claim', users_winner_path(winner), data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-sm' if winner.won? %></p>
       </div>
     </div>
   <% end %>
