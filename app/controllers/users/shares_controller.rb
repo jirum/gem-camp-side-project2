@@ -9,6 +9,7 @@ class Users::SharesController < ApplicationController
       flash[:notice] = "Successfully Shared!"
       redirect_to users_profile_path(report: 'winner')
     else
+      flash[:alert] = @winner.errors.full_messages.join(', ')
       render :show
     end
   end
