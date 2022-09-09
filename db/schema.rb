@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_01_033129) do
+ActiveRecord::Schema.define(version: 2022_09_08_081711) do
 
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.integer "genre"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2022_09_01_033129) do
   create_table "orders", charset: "utf8mb4", force: :cascade do |t|
     t.string "serial_number"
     t.string "state"
-    t.decimal "amount", precision: 10
+    t.decimal "amount", precision: 10, default: "0"
     t.integer "coin"
     t.string "remarks"
     t.integer "genre"

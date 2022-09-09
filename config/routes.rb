@@ -39,6 +39,11 @@ Rails.application.routes.draw do
       resources :orders, except: :show do
         put :submit, :pay ,:cancel
       end
+      resources :users, only: :index do
+        resources :increases, path: 'orders/increase', only: [:new, :create]
+        resources :deducts, path: 'orders/deduct', only:  [:new, :create]
+        resources :bonuses, path: 'orders/bonus', only: [:new, :create]
+      end
     end
   end
 end

@@ -93,8 +93,8 @@
           <td><%= order.user.email %></td>
           <td><%= order.state %></td>
           <td><%= order.genre %></td>
-          <td><%= order.offer.name %></td>
-          <td><%= order.offer.amount %></td>
+          <td><%= order.offer&.name %></td>
+          <td><%= order.offer&.amount %></td>
           <td><%= order.created_at %></td>
           <td><%= link_to 'Submit', admin_order_submit_path(order), class: 'btn btn-primary col-8', method: :put, data: { confirm: 'Are you sure?' } if order.may_submit? %>
           <%= link_to 'Pay', admin_order_pay_path(order), class: 'btn btn-warning col-8', method: :put, data: { confirm: 'Are you sure?' } if order.may_pay? %>

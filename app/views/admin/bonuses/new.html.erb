@@ -1,0 +1,48 @@
+<div class="center w-75" style="margin: 50px auto">
+  <div class="main">Balance Operate
+    <%= render 'errors/flash_error' %>
+    <div class="row">
+      <div class="col-6">
+        <div class="card text-center h-100">
+          <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+              <li class="nav-item">
+                <%= link_to 'Increase', new_admin_user_increase_path, class: "nav-link text-dark" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Deduct', new_admin_user_deduct_path, class: "nav-link text-dark" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Bonus', new_admin_user_bonuse_path, class: "nav-link text-dark active" %>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <%= form_for @order, url: admin_user_bonuses_path, method: :post do |f| %>
+              <%= render 'admin/shared/form', f: f %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card h-100">
+          <div class="card-header">User</div>
+          <div class="card-body">
+            <div class="input-group">
+              <span class="input-group-text">Username</span>
+              <%= text_field_tag :username, @user&.username, readonly: true, class: "form-control" %>
+            </div>
+            <div class="input-group mt-3">
+              <span class="input-group-text">Promoter Name</span>
+              <%= text_field_tag :email, @user&.email, readonly: true, class: "form-control" %>
+            </div>
+            <div class="input-group mt-3">
+              <span class="input-group-text">Coins</span>
+              <%= text_field_tag :coins, @user&.coins, readonly: true, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
