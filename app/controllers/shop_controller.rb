@@ -14,11 +14,13 @@ class ShopController < ApplicationController
     @order.user = current_user
     @order.offer = @offer
     if @order.save
-      flash[:notice] = "Order successfully"
-      redirect_to shop_index_path
-    else
-      flash[:alert] = @order.errors.full_messages.join(', ')
-      render :index
+      if @order.may_submit? && @order.submit!
+        flash[:notice] = "Order successfully"
+        redirect_to shop_index_path
+      else
+        flash[:alert] = @order.errors.full_messages.join(', ')
+        render :index
+      end
     end
   end
 
