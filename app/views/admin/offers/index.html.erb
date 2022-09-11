@@ -1,25 +1,25 @@
 <div class="center w-75" style="margin: 50px auto">
   <div class="main">
     <%= render 'errors/flash_error' %>
-    <div class="card mb-3">
+    <div class="card shadow mb-3">
       <div class="card-body">
         <%= form_tag({ url: admin_offers_path }, { method: :get }) do %>
           <div class="row">
-            <div class="col-3">
+            <div class="col-4">
               <%= label_tag :genre %>
               <%= select_tag :genre, options_for_select(Offer.genres.keys.map { |key| [key.humanize, key] }, params[:genre]), { prompt: 'Genre', class: "form-control form-select" } %>
             </div>
-            <div class="col-3">
+            <div class="col-4">
               <%= label_tag :status %>
               <%= select_tag :status, options_for_select(Offer.statuses.keys.map { |key| [key.humanize, key] }, params[:status]), { prompt: 'Status', class: "form-control form-select" } %>
             </div>
-            <div class="col-3 mt-auto">
+            <div class="col-4 mt-auto">
               <%= submit_tag :Search, class: 'btn btn-warning' %>
               <%= link_to 'Reset', admin_offers_path, class: 'btn btn-info' %>
               <%= link_to 'New', new_admin_offer_path, class: 'btn btn-success' %>
             </div>
+          </div>
         <% end %>
-        </div>
       </div>
     </div>
     <table class="table table-dark table-striped text-center fs-6">

@@ -1,19 +1,19 @@
 <div class="center w-75" style="margin: 50px auto">
   <div class="main">
     <%= render 'errors/flash_error' %>
-    <div class="card mb-3">
+    <div class="card shadow mb-3">
       <div class="card-body">
         <%= form_tag({ url: admin_winners_path }, { method: :get }) do %>
           <div class="row">
-            <div class="col-3">
+            <div class="col-4">
               <%= label_tag :serial_number %>
               <%= text_field_tag :serial_number, params[:serial_number], class: "form-control" %>
             </div>
-            <div class="col-3">
+            <div class="col-4">
               <%= label_tag :email %>
               <%= text_field_tag :email, params[:email], class: "form-control" %>
             </div>
-            <div class="col-3">
+            <div class="col-4">
               <%= label_tag :state %>
               <%= select_tag :state, options_for_select(Winner.aasm.states.map(&:name), params[:state]), { prompt: 'state', class:"form-control form-select"}%>
             </div>
@@ -58,7 +58,7 @@
       <tbody>
       <% @winners.each do |winner| %>
         <tr>
-          <td><%= winner.bet.serial_number %></td>
+          <td><%= winner.bet&.serial_number %></td>
           <td><%= winner.user.email %></td>
           <td><%= winner.state %></td>
           <td><%= concat_address(winner.user.addresses.find_by_is_default(true)) %></td>

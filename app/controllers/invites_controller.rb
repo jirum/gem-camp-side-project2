@@ -20,7 +20,7 @@ class InvitesController < ApplicationController
     @svg = qrcode.as_svg(
       color: "000",
       shape_rendering: "crispEdges",
-      module_size: 9,
+      module_size: 10,
       standalone: true,
       use_path: true
     )

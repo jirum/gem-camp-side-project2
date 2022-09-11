@@ -1,42 +1,43 @@
-<style>
-    .card {
-        margin: 0 auto;
-        float: none;
-        margin-top: 70px;
-    }
-</style>
-<div class="container" style="width:90vw; max-width:700px;">
-  <div class="card bg-light" style="font-family:'Baloo 2', cursive;">
-    <div class="card-header text-white text-center" style="background-color:#008080; font-size: 25px;">Claim Prize</div>
-    <div class="card-body">
-      <ul class="list-group list-group-flush">
-        <p style="font-size: 25px">Bet Winner</p>
-        <li class="list-group-item">
-          <p>Item: <%= @winner.bet.item.name %></p>
-          <p>Serial Number: <%= @winner.bet.serial_number %></p>
-          <p>Email: <%= @winner.user.email %></p>
-          <p>State: <%= @winner.state %></p>
-          <p>Created At: <%= @winner.created_at %></p>
-        </li>
-        <%= form_for @winner, url: users_winner_path(@winner), method: :patch do |f| %>
-          <p style="font-size: 25px; margin-top: 20px">Select Address</p>
-          <% current_user.addresses.each do |address| %>
-            <li class="list-group-item">
-              <%= f.radio_button :address, address.id, checked: address.is_default %>
-              <p>
-                <b><%= content_tag :div, 'Default', class: 'badge bg-info text-dark me-2 mb-2' if address.is_default? %><%= address.genre %></b>
-              </p>
-              <p>Name: <%= address.name %></p>
-              <p>Phone Number: <%= address.phone_number %></p>
-              <p>Street Address: <%= concat_address(address) %></p>
-          <% end %>
-          </li>
-          <%= link_to 'Back', users_profile_path(current_user), class: 'btn btn-primary mt-3 ms-auto' %>
-          <%= f.submit class: 'btn btn-primary mt-3 ms-auto'%>
-        <% end %>
-      </ul>
+<div class="container" style="width:90vw; max-width:1220px; margin-top: 70px">
+  <div class="card shadow bg-light">
+    <div class="card-header text-white text-center" style="background-color:#0da3c3; font-size: 25px;">Claim Prize</div>
+    <div class="card-body py-5 px-5">
+      <div style="font-size: 25px"><strong>Bet Winner</strong></div>
+      <div class="py-1"><strong>Item:</strong> <%= @winner.bet.item.name %></div>
+      <div class="py-1"><strong>Serial Number:</strong> <%= @winner.bet.serial_number %></div>
+      <div class="py-1"><strong>Email:</strong> <%= @winner.user.email %></div>
+      <div class="py-1"><strong>State:</strong> <%= @winner.state %></div>
+      <div class="py-1"><strong>Created At:</strong> <%= @winner.created_at %></div>
     </div>
   </div>
-  <br><br><br>
+  <div class="card shadow bg-light mt-3 py-4 px-4">
+    <div class="card-body">
+      <%= form_for @winner, url: users_winner_path(@winner), method: :patch do |f| %>
+        <div style="font-size: 25px; margin-top: 20px"><strong>Select Address</strong></div>
+        <% current_user.addresses.each do |address| %>
+          <div class="card shadow bg-light mt-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-11">
+                  <div class="py-1">
+                    <b><%= content_tag :div, 'Default', class: 'badge bg-info text-dark me-2' if address.is_default? %><%= address.genre %></b>
+                  </div>
+                  <div class="py-1"><strong>Name:</strong> <%= address.name %></div>
+                  <div class="py-1"><strong>Phone Number:</strong> <%= address.phone_number %></div>
+                  <div class="py-1"><strong>Street Address:</strong> <%= concat_address(address) %></div>
+                </div>
+                <div class="col-1 my-auto">
+                  <%= f.radio_button :address, address.id, checked: address.is_default %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <%= link_to 'Back', users_profile_path(current_user), class: 'btn btn-primary btn-sm mt-3' %>
+        <%= f.submit 'Claim', class: 'btn btn-success btn-sm mt-3 mx-auto' %>
+      <% end %>
+    </div>
+  </div>
 </div>
+<br><br><br>
 <%= render "users/shared/layout" %>

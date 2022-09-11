@@ -38,8 +38,8 @@
   </div>
 </div>
 <%= render 'errors/flash_error' %>
-<div class="container" style="margin-bottom: 100px">
-  <h4>Winners Feedback</h4>
+<div class="container" style="margin-bottom: 100px; max-width: 1220px">
+  <h4 style="padding: 10px">Winners Feedback</h4>
   <% @winner_exp.each do |winner| %>
     <%= link_to winner_experience_path(winner), class: 'img-fluid text-decoration-none text-dark' do %>
       <div class="card w-100 mt-2 bg-light">

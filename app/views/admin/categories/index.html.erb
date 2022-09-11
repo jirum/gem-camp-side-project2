@@ -2,31 +2,31 @@
   <div class="main">
     <%= render 'errors/flash_error' %>
     <%= form_tag({ url: admin_categories_path }, { method: :get }) do %>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <%= link_to 'New', new_admin_category_path, class: "btn btn-success ml-auto" %>
-        </div>
-        <div class="input-group mb-3 ms-auto" style="width: 350px">
-          <%= text_field_tag :name, params[:name], class: "form-control", placeholder: 'Name' %>
-          <div class="input-group-append">
+      <div class="d-inline-block">
+        <%= link_to 'New', new_admin_category_path, class: "btn btn-success" %>
+      </div>
+      <div class="d-inline-block" style="float: right">
+        <div class="d-inline-block">
+          <div class="input-group" style="width: 350px; margin-bottom: 10px">
+            <%= text_field_tag :name, params[:name], class: "form-control", placeholder: 'Name' %>
             <%= submit_tag :Search, class: "btn btn-warning" %>
-            <%= link_to 'Reset', admin_categories_path, class: 'btn btn-info' %>
           </div>
         </div>
+        <%= link_to 'Reset', admin_categories_path, class: 'btn btn-info' %>
       </div>
     <% end %>
     <table class="table table-dark table-striped text-center fs-6">
       <thead class="table-active">
       <tr>
-        <th colspan="3">Category List</th>
+        <th colspan="2">Category List</th>
       </tr>
       <tr>
         <th>Name</th>
-        <th colspan="2">Action</th>
+        <th>Action</th>
       </tr>
       </thead>
       <% if @categories.blank? %>
-        <td colspan="3">No Category Found</td>
+        <td colspan="2">No Category Found</td>
       <% end %>
       <tbody>
       <% @categories.each do |category| %>
@@ -34,7 +34,7 @@
           <td><%= category.name %></td>
           <td>
             <%= link_to "Edit", edit_admin_category_path(category), class: 'btn btn-primary' %>
-            <%= link_to 'Delete', admin_category_path(category), method: :delete, class: 'btn btn-danger', style: "display: inline-block", data: {confirm: 'Are you sure?'} %>
+            <%= link_to 'Delete', admin_category_path(category), method: :delete, class: 'btn btn-danger', style: "display: inline-block", data: { confirm: 'Are you sure?' } %>
           </td>
       <% end %>
       </tr>

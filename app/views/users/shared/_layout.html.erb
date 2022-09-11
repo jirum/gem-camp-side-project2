@@ -1,23 +1,28 @@
 <style>
-  .label {
-      display: block;
-      color: black;
-      font-size: 12px;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-  }
+    .label {
+        display: block;
+        color: black;
+        font-size: 12px;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
 </style>
-<nav class="navbar bg-info fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"><%= link_to root_path, class:'img-fluid' do %>
+<% if current_user %>
+  <nav class="navbar bg-info fixed-top">
+    <div class="container-fluid" style="max-width: 1220px">
+      <%= link_to root_path, class: 'img-fluid' do %>
         <img alt="logo" src="/logo.png" style="width: 19vw; max-width: 150px">
-      <% end %></a>
-     <ul class="nav ms-auto">
-      <% if current_user %>
+      <% end %>
+      <ul class="nav ms-auto">
         <li class="nav-item m-auto">
-          <a class="nav-link text-white" href="#">Coins </a>
-        </li>
+          <div class="px-1" style="background-color: #000; border-radius: 5px; padding: 2px;">
+            <%= link_to shop_index_path, class: 'text-decoration-none text-light bold', style: 'font-weight: bolder' do %>
+              <%= current_user.coins %>
+              <img alt="logo" src="/coin.svg" style="width: 20px; margin-left: 3px; margin-bottom: 3px">
+              </div>
+            <% end %>
+            </li>
         <li class="nav-item m-auto">
           <a class="nav-link text-white" href="#">Claim </a>
         </li>
@@ -26,133 +31,143 @@
             <img alt="logo" src="/globe.svg" style="width: 30px; margin-right: 12px">
           <% end %>
         </li>
-       </ul>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-          <div class="offcanvas-header">
-            <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body" style="font-family:'Baloo 2', cursive;">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <%= image_tag current_user.image.thumb.url, class:"d-flex justify-content-start rounded-circle mb-2", style: 'width: 50px' if current_user.image?%>
-              <li class="nav-item">
-                <%= "#{"Username: "}#{current_user.username}" %>
-              </li>
-              <li class="nav-item">
-                <%= "#{"Email: "}#{current_user.email}" %>
-              </li>
-              <li class="nav-item">
-                <%= "#{"Coins: "}#{current_user.coins}" %>
-              </li>
-              <li class="nav-item">
-                <button class="btn btn-primary form-control">Cash In Now</button>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contact Us</a>
-              </li>
-              <li class="nav-item">
-                <a><%= link_to "Profile", users_profile_path, class: "nav-link text-black" %></a>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "nav-link text-black"%>
-              </li>
-            </ul>
+      </ul>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-     </div>
-   </div>
-</nav>
-<nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
-  <ul class="nav mx-auto">
-    <li class="nav-item px-4 px-lg-5">
-      <%= link_to winner_experience_index_path, class:'img-fluid' do %>
-        <img alt="logo" src="/share.svg" style="width: 22px; margin-left: 4px">
-      <% end %>
-      <span class="label">Share</span>
-    </li>
-    <li class="nav-item px-4 px-lg-5">
-      <%= link_to invites_path, class:'img-fluid' do %>
-        <img alt="logo" src="/infinity.svg" style="width: 22px; margin-left: 4px">
-      <% end %>
-      <span class="label">Invite</span>
-    </li>
-    <li class="nav-item px-4 px-lg-5">
-      <%= link_to lottery_index_path, class:'img-fluid' do %>
-        <img alt="logo" src="/box2-heart.svg" style="width: 22px; margin-left: 8px">
-      <% end %>
-      <span class="label">Lottery</span>
-    </li>
-    <li class="nav-item px-4 px-lg-5">
-      <%= link_to shop_index_path, class:'img-fluid' do %>
-        <img alt="logo" src="/shop.svg" style="width: 22px; margin-left: 3px">
-      <% end %>
-      <span class="label">Shop</span>
-    </li>
-    <li class="nav-item px-4 px-lg-5">
-      <%= link_to users_profile_path, class:'img-fluid' do %>
-        <img alt="logo" src="/person.svg" style="width: 22px; margin-right: 1px">
-      <% end %>
-      <span class="label">Me</span>
-    </li>
-  </ul>
-</nav>
-<% else %>
-<ul class="nav">
-      <li class="nav-item px-2">
-        <%= link_to "Login", new_user_session_path, class: "btn btn-dark btn-sm mt-1" %>
-      </li>
-      <li class="nav-item px-2">
-         <%= link_to "Sign Up", new_user_registration_path, class:"btn btn-dark btn-sm mt-1" %>
-      </li>
-      <li class="nav-item px-2 mt-1">
-        <%= link_to class:'img-fluid' do %>
-          <img alt="logo" src="/globe.svg" style="width: 30px; margin-right: 5px">
-        <% end %>
-      </li>
-    </ul>
-         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-           <span class="navbar-toggler-icon"></span>
-         </button>
-         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-           <div class="offcanvas-header">
-             <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-           </div>
-           <div class="offcanvas-body" style="font-family:'Baloo 2', cursive;">
-             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" >
-               <p><li class="nav-item me-auto" href="#">Contact Us</li></p>
-               <p><li class="nav-item me-auto" href="#">Facebook</li></p>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <%= image_tag current_user.image.thumb.url, class: "d-flex justify-content-start rounded-circle mb-2", style: 'width: 50px' if current_user.image? %>
+            <li class="nav-item">
+              <%= "#{"Username: "}#{current_user.username}" %>
+            </li>
+            <li class="nav-item">
+              <%= "#{"Email: "}#{current_user.email}" %>
+            </li>
+            <li class="nav-item">
+              <%= "#{"Coins: "}#{current_user.coins}" %>
+            </li>
+            <li class="nav-item">
+              <button class="btn btn-primary form-control">Cash In Now</button>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a><%= link_to "Profile", users_profile_path, class: "nav-link text-black" %></a>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "nav-link text-black" %>
+            </li>
           </ul>
         </div>
-     </div>
-</nav>
-<nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
-  <ul class="nav mx-auto">
-    <li class="nav-item px-4 px-lg-5">
-      <%= link_to winner_experience_index_path class:'img-fluid' do %>
-        <img alt="logo" src="/share.svg" style="width: 22px; margin-left: 4px">
+      </div>
+    </div>
+  </nav>
+  <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
+    <ul class="nav mx-auto">
+      <li class="nav-item px-4 px-lg-5">
+        <%= link_to winner_experience_index_path, class: 'img-fluid' do %>
+          <img alt="logo" src="/share.svg" style="width: 22px; margin-left: 4px">
+        <% end %>
+        <span class="label">Share</span>
+      </li>
+      <li class="nav-item px-4 px-lg-5">
+        <%= link_to invites_path, class: 'img-fluid' do %>
+          <img alt="logo" src="/infinity.svg" style="width: 22px; margin-left: 4px">
+        <% end %>
+        <span class="label">Invite</span>
+      </li>
+      <li class="nav-item px-4 px-lg-5">
+        <%= link_to lottery_index_path, class: 'img-fluid' do %>
+          <img alt="logo" src="/box2-heart.svg" style="width: 22px; margin-left: 8px">
+        <% end %>
+        <span class="label">Lottery</span>
+      </li>
+      <li class="nav-item px-4 px-lg-5">
+        <%= link_to shop_index_path, class: 'img-fluid' do %>
+          <img alt="logo" src="/shop.svg" style="width: 22px; margin-left: 3px">
+        <% end %>
+        <span class="label">Shop</span>
+      </li>
+      <li class="nav-item px-4 px-lg-5">
+        <%= link_to users_profile_path, class: 'img-fluid' do %>
+          <img alt="logo" src="/person.svg" style="width: 22px; margin-right: 1px">
+        <% end %>
+        <span class="label">Me</span>
+      </li>
+    </ul>
+  </nav>
+<% else %>
+  <nav class="navbar bg-info fixed-top">
+    <div class="container-fluid" style="max-width: 1220px">
+      <%= link_to root_path, class: 'img-fluid' do %>
+        <img alt="logo" src="/logo.png" style="width: 19vw; max-width: 150px">
       <% end %>
-      <span class="label"">Share</span>
-    </li>
-    <li class="nav-item px-4 px-lg-5">
-      <%= link_to invites_path, class:'img-fluid' do %>
-        <img alt="logo" src="/infinity.svg" style="width: 22px; margin-left: 4px">
-      <% end %>
-      <span class="label">Invite</span>
-    </li>
-    <li class="nav-item px-4 px-lg-5">
-      <%= link_to lottery_index_path, class:'img-fluid' do %>
-        <img alt="logo" src="/box2-heart.svg" style="width: 22px; margin-left: 8px">
-      <% end %>
-      <span class="label">Lottery</span>
-    </li>
-    <li class="nav-item px-4 px-lg-5">
-      <%= link_to shop_index_path, class:'img-fluid' do %>
-        <img alt="logo" src="/shop.svg" style="width: 22px; margin-left: 3px">
-      <% end %>
-      <span class="label">Shop</span>
-    </li>
-  </ul>
-</nav>
+      <ul class="nav">
+        <li class="nav-item px-2">
+          <%= link_to "Login", new_user_session_path, class: "btn btn-dark btn-sm mt-1" %>
+        </li>
+        <li class="nav-item px-2">
+          <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-dark btn-sm mt-1" %>
+        </li>
+        <li class="nav-item px-2 mt-1">
+          <%= link_to class: 'img-fluid' do %>
+            <img alt="logo" src="/globe.svg" style="width: 30px; margin-right: 5px">
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas-header">
+      <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" style="font-family:'Baloo 2', cursive;">
+      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <p>
+        <li class="nav-item me-auto" href="#">Contact Us</li>
+        </p>
+        <p>
+        <li class="nav-item me-auto" href="#">Facebook</li>
+        </p>
+      </ul>
+    </div>
+  </div>
+  <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
+    <ul class="nav mx-auto">
+      <li class="nav-item px-4 px-lg-5">
+        <%= link_to winner_experience_index_path class: 'img-fluid' do %>
+          <img alt="logo" src="/share.svg" style="width: 22px; margin-left: 4px">
+        <% end %>
+        <span class="label">Share</span>
+      </li>
+      <li class="nav-item px-4 px-lg-5">
+        <%= link_to invites_path, class: 'img-fluid' do %>
+          <img alt="logo" src="/infinity.svg" style="width: 22px; margin-left: 4px">
+        <% end %>
+        <span class="label">Invite</span>
+      </li>
+      <li class="nav-item px-4 px-lg-5">
+        <%= link_to lottery_index_path, class: 'img-fluid' do %>
+          <img alt="logo" src="/box2-heart.svg" style="width: 22px; margin-left: 8px">
+        <% end %>
+        <span class="label">Lottery</span>
+      </li>
+      <li class="nav-item px-4 px-lg-5">
+        <%= link_to shop_index_path, class: 'img-fluid' do %>
+          <img alt="logo" src="/shop.svg" style="width: 22px; margin-left: 3px">
+        <% end %>
+        <span class="label">Shop</span>
+      </li>
+    </ul>
+  </nav>
 <% end %>
 
