@@ -44,6 +44,7 @@ Rails.application.routes.draw do
         resources :deducts, path: 'orders/deduct', only:  [:new, :create]
         resources :bonuses, path: 'orders/bonus', only: [:new, :create]
       end
+      resources :invite_list, only: :index
     end
   end
 end

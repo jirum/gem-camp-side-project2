@@ -1,0 +1,48 @@
+<div class="center w-75" style="margin: 50px auto">
+  <div class="main">
+    <%= form_tag({ url: admin_invite_list_index_path }, { method: :get }) do %>
+      <div class="d-inline-block" style="float: right">
+        <div class="d-inline-block">
+          <div class="input-group" style="width: 350px; margin-bottom: 10px">
+            <%= text_field_tag :parent_email, params[:parent_email], class: "form-control", placeholder: 'Parent Email' %>
+            <%= submit_tag :Search, class: "btn btn-warning" %>
+          </div>
+        </div>
+        <%= link_to 'Reset', admin_invite_list_index_path, class: 'btn btn-info' %>
+      </div>
+    <% end %>
+    <table class="table table-dark table-striped text-center fs-6">
+      <thead class="table-active">
+      <tr>
+        <th colspan="7">Invite List</th>
+      </tr>
+      <tr>
+        <th scope="col">Parent Email</th>
+        <th scope="col">Email</th>
+        <th scope="col">Total Deposit</th>
+        <th scope="col">Member Total Deposit</th>
+        <th scope="col">Coins</th>
+        <th scope="col">Total Used Coins</th>
+        <th scope="col">Children Members</th>
+      </tr>
+      </thead>
+      <% if @users.blank? %>
+        <td colspan="7">No Record Found</td>
+      <% end %>
+      <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.parent.email %></td>
+          <td><%= user.email %></td>
+          <td><%= user.total_deposit %></td>
+          <td><%= user.children.sum(:total_deposit) %></td>
+          <td><%= user.coins %></td>
+          <td><%= user.bets.where.not(state: :cancelled).count %></td>
+          <td><%= user.children_members %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
