@@ -1,0 +1,10 @@
+<div class="main">
+  <div class="card w-50 bg-light" style="margin: 0 auto; float: none; margin-top: 70px;">
+    <div class="card-body">
+      <%= render 'errors/error', model: @banner %>
+      <%= form_for @banner, url: admin_banners_path, method: :post do |f| %>
+        <%= render partial: 'form', locals: {f: f, banner: @banner} %>
+      <% end %>
+    </div>
+  </div>
+</div>

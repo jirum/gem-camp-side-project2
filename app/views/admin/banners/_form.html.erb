@@ -1,0 +1,20 @@
+<div class="card-body">
+  <div class="form-group">
+    <%= f.label :preview, class:'fs-6 mt-2' %>
+    <%= f.file_field :preview, class: 'form-control mt-3' %>
+  </div>
+  <div class="form-group">
+    <%= f.select(:status, Banner.statuses.keys.map { |key| [key.humanize, key] }, { include_blank: 'Please Select Status' }, { class: 'form-control mt-3' }) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :online_at, class:'fs-6 mt-2' %>
+    <%= f.date_field :online_at, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :offline_at, class:'fs-6 mt-2' %>
+    <%= f.date_field :offline_at, class: 'form-control' %>
+  </div>
+  <div class="form-group d-flex">
+    <%= f.submit class: 'btn btn-primary mt-3 mx-auto' %>
+  </div>
+</div>
