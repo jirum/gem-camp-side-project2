@@ -45,6 +45,7 @@ Rails.application.routes.draw do
         resources :bonuses, path: 'orders/bonus', only: [:new, :create]
       end
       resources :invite_list, only: :index
+      resources :news_tickers, except: :show
     end
   end
 end
