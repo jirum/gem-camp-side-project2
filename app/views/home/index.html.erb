@@ -1,19 +1,46 @@
 <%= render '/users/shared/banner' %>
 <%= render 'errors/flash_error' %>
 <div class="container" style="margin-bottom: 100px; max-width: 1220px">
-  <h4>Winners Feedback</h4>
-  <div class="row row-cols-4">
-    <img src="phone.png" class="col" width="250px" alt="iphone" data-wow-delay="0.3s">
-    <img src="phone.png" class="col" width="250px" alt="iphone" data-wow-delay="0.3s">
-    <img src="phone.png" class="col" width="250px" alt="iphone" data-wow-delay="0.3s">
-    <img src="phone.png" class="col" width="250px" alt="iphone" data-wow-delay="0.3s">
+  <h4 class="py-2">Winners Feedback</h4>
+  <div class="row">
+    <% @winners.each do |winner| %>
+      <div class="col">
+        <div class="card shadow">
+          <div class="body">
+            <div class="w-100 overflow-hidden" style="aspect-ratio: 1 / 1">
+              <%= link_to (image_tag winner.picture.url, alt: 'winner', class: "d-flex w-100" if winner.picture?), winner_experience_path(winner) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <% if @winners.size == 5 %>
+      <div class="col">
+        <%= link_to winner_experience_index_path, class: 'text-decoration-none text-dark' do %>
+          <div class="card shadow">
+            <div style="aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center;">More...</div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
-  <h4>Coming Soon</h4>
-  <div class="row row-cols-4">
-    <img src="phone.png" class="col" width="250px" alt="iphone" data-wow-delay="0.3s">
-    <img src="phone.png" class="col" width="250px" alt="iphone" data-wow-delay="0.3s">
-    <img src="phone.png" class="col" width="250px" alt="iphone" data-wow-delay="0.3s">
-    <img src="phone.png" class="col" width="250px" alt="iphone" data-wow-delay="0.3s">
+  <div class="row">
+    <h4 class="py-2">Coming Soon</h4>
+    <% @items.each do |item| %>
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="card shadow border-none mb-3 overflow-hidden" style="max-height: 250px; height:20vw; min-height: 220px">
+          <div class="overflow-hidden">
+            <%= link_to (image_tag item.image.url, alt: 'winner', class: 'card-img-top img-responsive' if item.image?), lottery_path(item) %>
+          </div>
+          <div class="card-footer flex-column mt-auto">
+            <h6 class="text-start"><%= item.name %></h6>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
+  <% if @items.size == 8 %>
+    <div class="float-end"><%= link_to 'More...', lottery_index_path, class: 'text-decoration-none text-dark' %></div>
+  <% end %>
 </div>
 <%= render "users/shared/layout" %>
